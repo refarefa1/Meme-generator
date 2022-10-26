@@ -33,6 +33,14 @@
     font-size: 1.5em;
 }
 
+.fa.plus::after{
+    content: "\2b";
+}
+
+.fa.minus::after{
+    content: "\f068";
+}
+
 .fa.add::before{
     content: "\2b";
     font-size: 1.5em;

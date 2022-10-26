@@ -48,6 +48,20 @@ function onImgSelect() {
     document.querySelector('.meme-editor-container').classList.remove('hide')
     document.querySelector('.main-content').classList.add('hide')
     setImg(this)
+    resizeCanvas()
+    addEventListener('resize', resizeCanvas);
+    renderMeme()
+}
+
+function resizeCanvas() {
+    const elContainer = document.querySelector('.meme-editor-container')
+    if (window.innerWidth < 820) {
+        gElCanvas.width = elContainer.offsetWidth - 50
+        gElCanvas.height = elContainer.offsetWidth - 50
+    } else{
+        gElCanvas.width = elContainer.offsetHeight - 50
+        gElCanvas.height = elContainer.offsetHeight - 50
+    }
     renderMeme()
 }
 
