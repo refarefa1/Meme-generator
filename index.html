@@ -37,20 +37,22 @@
                 <button>More</button>
             </section>
         </section>
-
         <section class="gallery-container">
-            <!-- <img src="img/memes/1.jpg" alt=""> -->
-            
         </section>
     </main>
 
-    <section class="meme-editor-container main-layout">
+    <section class="meme-editor-container main-layout hide">
         <h1>MEME EDITOR!</h1>
         <section class="canvas-container">
             <canvas id="my-canvas" width="300" height="300"></canvas>
         </section>
         <section class="features-container">
-            <input oninput="onDrawText(this.value)" type="text" placeholder="Your text here...">
+            <input oninput="onDrawText(this.value)" class="text-input" type="text" placeholder="Your text here...">
+            <input oninput="onChangeColor(this.value)" type="color" value="#ffffff">
+            <button onclick="onChangeSize(2)">+</button>
+            <button onclick="onChangeSize(-2)">-</button>
+            <button>Add Line</button>
+            <button onclick="onSwitchLine()">Switch Line</button>
         </section>
     </section>
 
@@ -67,7 +69,7 @@
 
 
 
-  
+
 
 
 
