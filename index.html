@@ -9,38 +9,65 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body class="main-layout">
+<body class="main-layout" onload="onInit()">
 
 
-    <nav class="main-nav gradient flex space-between full">
-        <section class="logo"><h1>Logo</h1></section>
-        <ul class="clean-list flex">
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Memes</a></li>
-        </ul>
+    <nav class="main-nav gradient full main-layout">
+        <section class="nav-content flex space-between align-center">
+            <section class="logo">
+                <h1>Logo</h1>
+            </section>
+            <section class="burger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </section>
+            <ul class="clean-list flex hide">
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Memes</a></li>
+            </ul>
+        </section>
     </nav>
 
-    <main class="main-content">
-        <section class="filter-container"></section>
-        <section class="gallery-container"></section>
+    <main class="main-content main-layout">
+        <section class="filter-container flex column">
+            <input type="search">
+            <section class="tags flex space-between">
+                Funny animal bla bla bla bla
+                <button>More</button>
+            </section>
+        </section>
+
+        <section class="gallery-container">
+            <img src="img/memes/1.jpg" alt="">
+            <img src="img/memes/2.jpg" alt="">
+        </section>
     </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <section class="canvas-container">
-        <canvas width="500" height="500"></canvas>
+    <section class="meme-editor-container main-layout">
+        <h1>MEME EDITOR!</h1>
+        <section class="canvas-container">
+            <canvas id="my-canvas" width="300" height="300"></canvas>
+        </section>
+        <section class="features-container">
+            <input type="text" placeholder="Your text here...">
+        </section>
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
@@ -50,6 +77,7 @@
 
     <script src="js/service/gallery-service.js"></script>
     <script src="js/gallery-controller.js"></script>
+    <script src="js/meme-controller.js"></script>
 
 
 </body>
