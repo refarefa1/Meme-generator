@@ -12,29 +12,34 @@
 <body class="main-layout" onload="onInit()">
 
 
+   
+
     <nav class="main-nav gradient full main-layout">
         <section class="nav-content flex space-between align-center">
-            <section class="logo">
-                <h1>Logo</h1>
+            <section class="logo fr">
+                <h1>MEME-GEN</h1>
             </section>
-            <section class="burger">
+            <section onclick="onToggleMenu()" class="burger flex column align-center justify-center">
                 <div></div>
                 <div></div>
                 <div></div>
             </section>
-            <ul class="clean-list flex hide">
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Memes</a></li>
+            <ul class="menu clean-list flex column justify-center align-center full">
+                <li onclick="onChangePage('gallery')"><a href="#">Gallery</a></li>
+                <li onclick="onChangePage('memes')"><a href="#">Memes</a></li>
             </ul>
         </section>
     </nav>
 
+
+    <section onclick="onToggleMenu()" class="black-screen full"></section>
+
     <main class="main-content main-layout">
         <section class="filter-container flex column">
-            <input type="search">
-            <section class="tags flex space-between">
-                Funny animal bla bla bla bla
-                <button>More</button>
+            <input class="search-filter frr" type="search" placeholder="Search">
+            <section class="tags-container flex space-between">
+                <section class="tags">Funny animal bla bla bla bla</section>
+                <button class="tags-btn gradient frr">More</button>
             </section>
         </section>
         <section class="gallery-container">
@@ -42,17 +47,16 @@
     </main>
 
     <section class="meme-editor-container main-layout hide">
-        <h1>MEME EDITOR!</h1>
-        <section class="canvas-container">
+        <section class="canvas-container flex justify-center">
             <canvas id="my-canvas" width="300" height="300"></canvas>
         </section>
         <section class="features-container">
             <input oninput="onDrawText(this.value)" class="text-input" type="text" placeholder="Your text here...">
-            <input oninput="onChangeColor(this.value)" type="color" value="#ffffff">
-            <button onclick="onChangeSize(2)">+</button>
-            <button onclick="onChangeSize(-2)">-</button>
-            <button>Add Line</button>
-            <button onclick="onSwitchLine()">Switch Line</button>
+            <input oninput="onChangeColor(this.value)" class="color-input" type="color" value="#ffffff">
+            <button class="fa plus" onclick="onChangeSize(2)">+</button>
+            <button class="fa minus" onclick="onChangeSize(-2)">-</button>
+            <button class="fa add"></button>
+            <button class="fa switch" onclick="onSwitchLine()"></button>
         </section>
     </section>
 
@@ -82,6 +86,7 @@
     <script src="js/service/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
     <script src="js/meme-controller.js"></script>
+    <script src="js/main-controller.js"></script>
 
 
 </body>
