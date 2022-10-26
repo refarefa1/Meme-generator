@@ -1,0 +1,52 @@
+@font-face {
+    font-family: impact;
+    src: url(../fonts/impact/impact.ttf);
+}
+
+@font-face {
+    font-family: righteous;
+    src: url(../fonts/righteous/Righteous-Regular.ttf);
+}
+
+@font-face {
+    font-family: raleway-light;
+    src: url(../fonts/raleway/Raleway-Light.ttf);
+}
+
+@font-face {
+    font-family: raleway-regular;
+    src: url(../fonts/raleway/Raleway-Regular.ttf);
+}
+
+@font-face {
+    font-family: fa;
+    src: url(../fonts/fa/fa-solid-900.ttf);
+}
+
+.fa{
+    font-family: fa;
+}
+
+.fa.plus::before,
+.fa.minus::before{
+    content: "\f031";
+    font-size: 1.5em;
+}
+
+.fa.add::before{
+    content: "\2b";
+    font-size: 1.5em;
+}
+
+.fa.switch::before{
+    content: "\f07d";
+    font-size: 1.5em;
+}
+
+.frr {
+    font-family: raleway-regular;
+}
+
+.fr {
+    font-family: righteous;
+}

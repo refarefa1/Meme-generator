@@ -3,16 +3,6 @@
 var gElCanvas
 var gCtx
 
-function onInit() {
-
-    renderGallery()
-
-    gElCanvas = document.getElementById('my-canvas')
-    gCtx = gElCanvas.getContext('2d')
-
-    addListeners()
-}
-
 function renderMeme() {
     const meme = getMeme()
     // image
@@ -60,18 +50,4 @@ function onImgSelect() {
     setImg(this)
     renderMeme()
 }
-
-// LISTENERS
-
-function addListeners() {
-    addImgListeners()
-}
-
-function addImgListeners() {
-    const imgs = document.querySelectorAll('.gallery-container img')
-    imgs.forEach(img => img.addEventListener('click', onImgSelect))
-}
-
-
-
 

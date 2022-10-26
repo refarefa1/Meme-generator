@@ -1,14 +1,15 @@
+@import url(../css/fonts.css);
+
 :root {
-    --clr1: rgb(63, 169, 196);
-    --clr2: rgb(44, 211, 155);
+    --clr1: #129EAD;
+    --clr2: #2CB77B;
+    --clr3: #22252C;
+    --clr4: #383B42;
+    --clr5: #87898D;
+    --clr8: #ffffff;
 }
 
 /* BASICS */
-
-@font-face {
-    font-family: impact;
-    src: url(../fonts/impact/impact.ttf);
-}
 
 * {
     box-sizing: border-box;
@@ -16,6 +17,9 @@
 
 body {
     margin: 0;
+    background-color: var(--clr3);
+    color: white;
+    font-family: raleway-regular;
 }
 
 a {
@@ -38,13 +42,30 @@ h6 {
 
 h1 {
     font-size: 2em;
+    color: var(--clr8)
+}
+
+input {
+    border-radius: 0.8em;
+    height: 40px;
+    border: none;
+    background-color: var(--clr3);
+    padding: 15px;
+    font-size: 1em;
+}
+
+input[type=color] {
+    width: 100%;
+}
+
+button {
+    border: none;
 }
 
 .main-layout>* {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-
 }
 
 /* HELPERS */
@@ -53,12 +74,12 @@ h1 {
     display: flex;
 }
 
-.flex.column{
+.flex.column {
     flex-direction: column;
 }
 
-.flex.wrap{
-flex-wrap: wrap;
+.flex.wrap {
+    flex-wrap: wrap;
 }
 
 .flex.align-center {
@@ -91,43 +112,249 @@ flex-wrap: wrap;
     background-image: linear-gradient(to right, var(--clr1), var(--clr2));
 }
 
+.main-nav .nav-content .menu.transform-menu {
+    transform: translateY(0%);
+}
+
 /* COMPONENTS */
 
-.main-content{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-top: 10px;
-    background-color: rgb(53, 47, 47);
+/* gallery */
+
+.main-content,
+.meme-editor-container {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: var(--clr4);
+    border-radius: 0.6em;
 }
 
-.filter-container {
-    background-color: rgb(159, 197, 197);
-    height: 8vh;
-}
-
-.gallery-container {
-    background-color: rgb(136, 136, 207);
+.main-content .gallery-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
 
-.gallery-container >*{
+.main-content .gallery-container>* {
     width: 100%;
+    border-radius: 1em;
     object-fit: cover;
+}
+
+/* nav */
+
+.main-nav {
+    z-index: 5;
+    position: fixed;
+    top: 0;
+}
+
+.main-nav .nav-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.main-nav .nav-content .menu {
+    z-index: 10;
+    background-color: var(--clr8);
+    color: #22252C;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 20vh;
+    font-size: 2.5em;
+    box-shadow: 0 0 10px var(--clr3);
+    transform: translateY(-110%);
+    transition: .4s;
+}
+
+.main-nav .nav-content .menu>* {
+    padding: 10px;
+}
+
+.main-nav .nav-content .menu>*:not(:last-child) {
+    border-bottom: var(--clr3) 2px solid;
 }
 
 /* burger */
 
-.burger>*{
-    width: 40px;
-    height: 5px;
-    margin: 10px;
-    background-color: black;
+.main-nav .burger {
+    height: 50px;
+    width: 50px;
+    border-radius: 2em;
+    background-color: var(--clr8);
 }
+
+.main-nav .burger>* {
+    width: 50%;
+    height: 5px;
+    margin: 2px;
+    border-radius: 2em;
+    background-color: var(--clr2)
+}
+
+/* black-screen */
+
+.black-screen {
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    transition: .4s;
+}
+
+.black-screen.menu-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* main */
+
+.main-content,
+.meme-editor-container {
+    margin-top: 120px;
+}
+
+/* filter */
+
+.filter-container input {
+    margin-bottom: 15px;
+    height: 50px;
+}
+
+.filter-container .tags {
+    background-color: var(--clr5);
+    border-radius: 2em;
+    padding: 1em;
+    margin-bottom: 15px;
+}
+
+.filter-container button {
+    margin-bottom: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 2em;
+    color: white;
+    border: none;
+}
+
 
 /* canvas */
 
-canvas{
+canvas {
     background-color: aquamarine;
+}
+
+/* features */
+
+.features-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    grid-template-areas:
+        '. minus color plus .'
+        'line line line line line'
+        'add switch . . .'
+    ;
+}
+
+.features-container>* {
+    margin-top: 20px;
+}
+
+.features-container button,
+.features-container .color-input {
+    background-color: var(--clr3);
+    color: var(--clr8);
+    border-radius: 1em;
+    aspect-ratio: 1/1;
+}
+
+
+.features-container .text-input {
+    grid-area: line;
+}
+
+.features-container .color-input {
+    grid-area: color;
+    height: inherit;
+
+}
+
+.features-container .plus {
+    grid-area: plus;
+}
+
+.features-container .minus {
+    grid-area: minus;
+}
+
+.features-container .add {
+    grid-area: add;
+}
+
+.features-container .switch {
+    grid-area: switch;
+}
+
+@media only screen and (min-width: 820px) {
+
+    .main-nav .nav-content .menu>*:not(:last-child){
+        border: none;
+    }
+
+    .main-nav .nav-content .menu {
+        height: 0px;
+        font-size: 1.5em;
+        position: static;
+        flex-direction: row;
+        justify-content: flex-end;
+        transform: translateY(0%);
+        background-color: transparent;
+        box-shadow: none;
+        color: white;
+        width: fit-content
+    }
+
+    .main-nav .nav-content .burger {
+        display: none;
+    }
+
+    .main-content .gallery-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .main-content .filter-container .tags-container .tags {
+        width: 60%;
+    }
+
+    .main-content .filter-container .tags-container .tags-btn {
+        width: 30%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+
+    .main-content .filter-container{
+        flex-direction: row;
+    }
+
+    .main-content .filter-container .search-filter,
+    .main-content .filter-container .tags-container{
+        flex-grow: 1;
+    }
+
+    .main-content .filter-container .tags-container{
+        justify-content: flex-end;
+    }
+
+    .main-content .filter-container .tags-container .tags{
+        flex-basis: 65%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .main-content .gallery-container {
+        grid-template-columns: repeat(5, 1fr);
+    }
 }
