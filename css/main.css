@@ -1,0 +1,86 @@
+:root {
+    --clr1: rgb(63, 169, 196);
+    --clr2: rgb(44, 211, 155);
+}
+
+/* BASICS */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    font-size: 2em;
+}
+
+.main-layout>*{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+/* HELPERS */
+
+.flex {
+    display: flex;
+}
+
+.flex.align-center {
+    align-items: center;
+}
+
+.flex.justify-center {
+    justify-content: center;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+
+.full {
+    width: 100%;
+}
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.gradient {
+    background-image: linear-gradient(to right, var(--clr1), var(--clr2));
+}
+
+/* COMPONENTS */
+
+.filter-container {
+    background-color: rgb(159, 197, 197);
+    height: 8vh;
+}
+
+.gallery-container {
+    background-color: rgb(136, 136, 207);
+    height: 100vh;
+}
