@@ -11,18 +11,29 @@ function renderMeme() {
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         const lines = meme.lines
+<<<<<<< HEAD
         lines.forEach(({ color, size, txt, align, isStroke, font }, idx) => {
             drawText(color, size, txt, align, isStroke, font, idx)
+=======
+        lines.forEach(({ color, size, txt, pos, align, isStroke, font }, idx) => {
+            drawText(color, size, txt, pos, align, isStroke, font, idx)
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
         })
     }
 
 }
 
+<<<<<<< HEAD
 
 function drawText(color, size, txt, align, isStroke, font, idx) {
     const meme = getMeme()
     const user = getUser()
     const pos = meme.lines[idx].position
+=======
+function drawText(color, size, txt, pos, align, isStroke, font, idx) {
+    const meme = getMeme()
+    const user = getUser()
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
     gCtx.textAlign = align
@@ -31,11 +42,19 @@ function drawText(color, size, txt, align, isStroke, font, idx) {
     gCtx.strokeStyle = 'black'
     gCtx.lineJoin = "miter"
     gCtx.miterLimit = 2;
+<<<<<<< HEAD
     gCtx.strokeText(txt, pos.x, pos.y)
     if (!isStroke) {
         gCtx.fillText(txt, pos.x, pos.y)
     }
     if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, idx)
+=======
+    gCtx.strokeText(txt, gElCanvas.width / 2, pos * gElCanvas.height)
+    if (!isStroke) {
+        gCtx.fillText(txt, gElCanvas.width / 2, pos * gElCanvas.height)
+    }
+    if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, pos)
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
 }
 
 function drawTextRect(txt, idx) {

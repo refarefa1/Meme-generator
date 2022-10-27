@@ -6,7 +6,10 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 var gStartPos
 var gUser = {
+<<<<<<< HEAD
     isDrag: false,
+=======
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
     isSaving: false,
 }
 var gSavedMemes = []
@@ -20,11 +23,16 @@ var gMeme = {
             size: 50,
             align: 'center',
             color: 'white',
+<<<<<<< HEAD
             isStroke: false,
             position: {
                 x: 0,
                 y: 50
             }
+=======
+            pos: 0.2,
+            isStroke: false,
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
         },
         {
             txt: 'TEXT',
@@ -32,15 +40,21 @@ var gMeme = {
             size: 50,
             align: 'center',
             color: 'white',
+<<<<<<< HEAD
             isStroke: false,
             position: {
                 x: 0,
                 y: 0
             }
+=======
+            pos: 0.9,
+            isStroke: false,
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
         }
     ]
 }
 
+<<<<<<< HEAD
 function moveText(dx, dy) {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].position.x += dx
@@ -91,10 +105,16 @@ function checkIsDrag(ev) {
 
 }
 
+=======
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
 function resetMeme() {
     gMeme = {
         selectedImgId: 0,
         selectedLineIdx: 0,
+<<<<<<< HEAD
+=======
+        url: '',
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
         lines: [
             {
                 txt: 'TEXT',
@@ -102,11 +122,16 @@ function resetMeme() {
                 size: 50,
                 align: 'center',
                 color: 'white',
+<<<<<<< HEAD
                 isStroke: false,
                 position: {
                     x: 0,
                     y: 50
                 }
+=======
+                pos: 0.2,
+                isStroke: false
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
             },
             {
                 txt: 'TEXT',
@@ -114,11 +139,16 @@ function resetMeme() {
                 size: 50,
                 align: 'center',
                 color: 'white',
+<<<<<<< HEAD
                 isStroke: false,
                 position: {
                     x: 0,
                     y: 0
                 }
+=======
+                pos: 0.9,
+                isStroke: false
+>>>>>>> 7001d377f469483055adc45b592cad3efb72883d
             }
         ]
     }
