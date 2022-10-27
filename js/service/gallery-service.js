@@ -7,7 +7,7 @@ var gMemes
 function createImgs() {
     let imgs = []
     for (let i = 1; i < 17; i++) {
-        const img = createImg(`http://127.0.0.1:5500/img/memes/${i}.jpg`)
+        const img = createImg(`../../img/memes/${i}.jpg`)
         imgs.push(img)
     }
     return imgs
