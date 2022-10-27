@@ -191,6 +191,7 @@ function onImgSelect() {
     setImg(this)
     resizeCanvas()
     addEventListener('resize', resizeCanvas);
+    setTextLocation()
     renderMeme()
 }
 
@@ -203,6 +204,7 @@ function resizeCanvas() {
         gElCanvas.width = elContainer.offsetHeight - 50
         gElCanvas.height = elContainer.offsetHeight - 50
     }
+    setTextLocation()
     renderMeme()
 }
 
@@ -210,4 +212,14 @@ function onDownloadImg(elLink) {
     console.log('downloading...');
     const imgContent = gElCanvas.toDataURL()
     elLink.href = imgContent
+}
+
+function setTextLocation(){
+    const meme = getMeme()
+    const lines = meme.lines
+    lines.forEach((line, idx) => {
+        console.log(line);
+        line.position.x = gElCanvas.width / 2
+        if (idx === 1) line.position.y = gElCanvas.height - 50
+    })
 }
