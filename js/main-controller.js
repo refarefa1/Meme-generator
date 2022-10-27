@@ -19,7 +19,8 @@ function onChangePage(page) {
         document.querySelector('.main-content').classList.add('hide')
         document.querySelector('.saved-memes').classList.remove('hide')
     }
-
+    resetMeme()
+    document.querySelector('.text-input').value = ''
     onToggleMenu()
 }
 

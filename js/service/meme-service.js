@@ -1,14 +1,18 @@
 'use strict'
 
+
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
+
+
+var gStartPos
 var gUser = {
-    isClicked: false,
-    isSaving: false
+    isDrag: false,
+    isSaving: false,
 }
 var gSavedMemes = []
 var gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
-    url: '',
     lines: [
         {
             txt: 'TEXT',
@@ -16,8 +20,11 @@ var gMeme = {
             size: 50,
             align: 'center',
             color: 'white',
-            pos: 0.2,
-            isStroke: false
+            isStroke: false,
+            position: {
+                x: 0,
+                y: 50
+            }
         },
         {
             txt: 'TEXT',
@@ -25,13 +32,99 @@ var gMeme = {
             size: 50,
             align: 'center',
             color: 'white',
-            pos: 0.9,
-            isStroke: false
+            isStroke: false,
+            position: {
+                x: 0,
+                y: 0
+            }
         }
     ]
 }
 
-function getUser(){
+function moveText(dx, dy) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].position.x += dx
+    gMeme.lines[lineIdx].position.y += dy
+
+}
+
+function isTextClicked(pos) {
+    const lineIdx = gMeme.selectedLineIdx
+    const txt = gMeme.lines[lineIdx].txt
+    const textPos = gMeme.lines[lineIdx].position
+    const textWidth = gCtx.measureText(txt).width
+    const textHeight = gCtx.measureText(txt).fontBoundingBoxAscent + gCtx.measureText(txt).fontBoundingBoxDescent
+
+    if (pos.x < textPos.x + textWidth / 2 + 20 &&
+        pos.x > textPos.x - textWidth / 2 - 20 &&
+        pos.y < textPos.y + textHeight / 2 + 20 &&
+        pos.y > textPos.y - textHeight / 2 - 20) {
+        gUser.isDrag = true
+        return true
+    }
+
+}
+
+function getEvPos(ev) {
+
+    //Gets the offset pos , the default pos
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY
+    }
+    // Check if its a touch ev
+    if (TOUCH_EVS.includes(ev.type)) {
+        //soo we will not trigger the mouse ev
+        ev.preventDefault()
+        //Gets the first touch point
+        ev = ev.changedTouches[0]
+        //Calc the right pos according to the touch screen
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+        }
+    }
+    return pos
+}
+
+function checkIsDrag(ev) {
+
+}
+
+function resetMeme() {
+    gMeme = {
+        selectedImgId: 0,
+        selectedLineIdx: 0,
+        lines: [
+            {
+                txt: 'TEXT',
+                font: 'impact',
+                size: 50,
+                align: 'center',
+                color: 'white',
+                isStroke: false,
+                position: {
+                    x: 0,
+                    y: 50
+                }
+            },
+            {
+                txt: 'TEXT',
+                font: 'impact',
+                size: 50,
+                align: 'center',
+                color: 'white',
+                isStroke: false,
+                position: {
+                    x: 0,
+                    y: 0
+                }
+            }
+        ]
+    }
+}
+
+function getUser() {
     return gUser
 }
 
@@ -90,7 +183,10 @@ function addLine(txt = 'TEXT') {
         size: 50,
         align: 'center',
         color: 'white',
-        pos: 0.5,
+        position: {
+            x: gElCanvas.width / 2,
+            y: gElCanvas.height / 2
+        },
         isStroke: false
     }
     gMeme.lines.push(line)
@@ -123,7 +219,6 @@ function changeColor(color) {
 
 function setImg(elImg) {
     gMeme.selectedImgId = elImg.dataset.id
-    gMeme.url = elImg
 }
 
 function getImgs() {
@@ -133,4 +228,6 @@ function getImgs() {
 function getMeme() {
     return gMeme
 }
+
+
 

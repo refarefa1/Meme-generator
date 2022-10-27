@@ -5,53 +5,101 @@ var gCtx
 
 function renderMeme() {
     const meme = getMeme()
-    const user = getUser()
     const currImg = getImgById(meme.selectedImgId)
     const img = new Image()
     img.src = currImg.url
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         const lines = meme.lines
-        lines.forEach(({ color, size, txt, pos, align, isStroke, font }, idx) => {
-            drawText(color, size, txt, pos, align, isStroke, font)
-            if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, pos)
+        lines.forEach(({ color, size, txt, align, isStroke, font }, idx) => {
+            drawText(color, size, txt, align, isStroke, font, idx)
         })
     }
 
 }
 
-function onDown() {
 
-}
-function onMove() {
-
-}
-function onUp() {
-
-}
-
-function drawText(color, size, txt, pos, align, isStroke, font) {
+function drawText(color, size, txt, align, isStroke, font, idx) {
+    const meme = getMeme()
+    const user = getUser()
+    const pos = meme.lines[idx].position
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
     gCtx.textAlign = align
+    gCtx.textBaseline = 'middle';
     gCtx.lineWidth = isStroke ? 3 : 8
     gCtx.strokeStyle = 'black'
     gCtx.lineJoin = "miter"
     gCtx.miterLimit = 2;
-    gCtx.strokeText(txt, gElCanvas.width / 2, pos * gElCanvas.height)
-    if (isStroke) return
-    gCtx.fillText(txt, gElCanvas.width / 2, pos * gElCanvas.height)
+    gCtx.strokeText(txt, pos.x, pos.y)
+    if (!isStroke) {
+        gCtx.fillText(txt, pos.x, pos.y)
+    }
+    if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, idx)
 }
 
-function drawTextRect(txt, pos) {
+function drawTextRect(txt, idx) {
+    const meme = getMeme()
+    const pos = meme.lines[idx].position
     const textWidth = gCtx.measureText(txt).width
     const textHeight = gCtx.measureText(txt).fontBoundingBoxAscent + gCtx.measureText(txt).fontBoundingBoxDescent
-    const startPosX = gElCanvas.width / 2 - textWidth / 2 - 20
-    const startPosY = gElCanvas.height * pos - textHeight
+    const startPosX = pos.x - textWidth / 2
+    const startPosY = pos.y - textHeight / 2
 
     gCtx.strokeStyle = 'orange'
-    gCtx.strokeRect(startPosX, startPosY, textWidth + 40, textHeight + 20)
+    gCtx.strokeRect(startPosX - 10, startPosY - 5, textWidth + 20, textHeight + 5)
 }
+
+function onDown(ev) {
+    //Get the ev pos from mouse or touch
+    const pos = getEvPos(ev)
+    if (!isTextClicked(pos)) return
+    console.log('TOUCH!');
+
+    //Save the pos we start from 
+    gStartPos = pos
+    document.body.style.cursor = 'grabbing'
+
+}
+
+function onMove(ev) {
+    const { isDrag } = getUser()
+    if (!isDrag) return
+    const meme = getMeme()
+    const lineIdx = meme.selectedLineIdx
+    const pos = getEvPos(ev)
+    //Calc the delta , the diff we moved
+    const dx = pos.x - meme.lines[lineIdx].position.x
+    const dy = pos.y - meme.lines[lineIdx].position.y
+
+    moveText(dx, dy)
+    renderMeme()
+
+}
+
+function onUp() {
+    const user = getUser()
+    user.isDrag = false
+    document.body.style.cursor = 'grab'
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function renderSavedMeme(idx) {
     const user = getUser()
@@ -146,6 +194,7 @@ function onImgSelect() {
     setImg(this)
     resizeCanvas()
     addEventListener('resize', resizeCanvas);
+    setTextLocation()
     renderMeme()
 }
 
@@ -158,6 +207,7 @@ function resizeCanvas() {
         gElCanvas.width = elContainer.offsetHeight - 50
         gElCanvas.height = elContainer.offsetHeight - 50
     }
+    setTextLocation()
     renderMeme()
 }
 
@@ -165,4 +215,14 @@ function onDownloadImg(elLink) {
     console.log('downloading...');
     const imgContent = gElCanvas.toDataURL()
     elLink.href = imgContent
+}
+
+function setTextLocation(){
+    const meme = getMeme()
+    const lines = meme.lines
+    lines.forEach((line, idx) => {
+        console.log(line);
+        line.position.x = gElCanvas.width / 2
+        if (idx === 1) line.position.y = gElCanvas.height - 50
+    })
 }
