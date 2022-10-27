@@ -6,7 +6,6 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 var gStartPos
 var gUser = {
-    isDrag: false,
     isSaving: false,
 }
 var gSavedMemes = []

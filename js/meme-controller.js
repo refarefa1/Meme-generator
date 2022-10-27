@@ -18,6 +18,7 @@ function renderMeme() {
 
 }
 
+
 function drawText(color, size, txt, align, isStroke, font, idx) {
     const meme = getMeme()
     const user = getUser()
@@ -25,6 +26,7 @@ function drawText(color, size, txt, align, isStroke, font, idx) {
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
     gCtx.textAlign = align
+    gCtx.textBaseline = 'middle';
     gCtx.textBaseline = 'middle';
     gCtx.lineWidth = isStroke ? 3 : 8
     gCtx.strokeStyle = 'black'
@@ -77,6 +79,24 @@ function onUp() {
     user.isDrag = false
     document.body.style.cursor = 'grab'
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function renderSavedMeme(idx) {
     const user = getUser()
@@ -171,7 +191,6 @@ function onImgSelect() {
     setImg(this)
     resizeCanvas()
     addEventListener('resize', resizeCanvas);
-    setTextLocation()
     renderMeme()
 }
 
@@ -184,7 +203,6 @@ function resizeCanvas() {
         gElCanvas.width = elContainer.offsetHeight - 50
         gElCanvas.height = elContainer.offsetHeight - 50
     }
-    setTextLocation()
     renderMeme()
 }
 
@@ -192,13 +210,4 @@ function onDownloadImg(elLink) {
     console.log('downloading...');
     const imgContent = gElCanvas.toDataURL()
     elLink.href = imgContent
-}
-
-function setTextLocation() {
-    const meme = getMeme()
-    const lines = meme.lines
-    lines.forEach((line, idx) => {
-        line.position.x = gElCanvas.width / 2
-        if (idx === 1) line.position.y = gElCanvas.height - 50
-    })
 }
