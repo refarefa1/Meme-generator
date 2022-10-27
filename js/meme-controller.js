@@ -5,7 +5,6 @@ var gCtx
 
 function renderMeme() {
     const meme = getMeme()
-    const user = getUser()
     const currImg = getImgById(meme.selectedImgId)
     const img = new Image()
     img.src = currImg.url
@@ -13,24 +12,15 @@ function renderMeme() {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         const lines = meme.lines
         lines.forEach(({ color, size, txt, pos, align, isStroke, font }, idx) => {
-            drawText(color, size, txt, pos, align, isStroke, font)
-            if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, pos)
+            drawText(color, size, txt, pos, align, isStroke, font, idx)
         })
     }
 
 }
 
-function onDown() {
-
-}
-function onMove() {
-
-}
-function onUp() {
-
-}
-
-function drawText(color, size, txt, pos, align, isStroke, font) {
+function drawText(color, size, txt, pos, align, isStroke, font, idx) {
+    const meme = getMeme()
+    const user = getUser()
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
     gCtx.textAlign = align
@@ -39,8 +29,10 @@ function drawText(color, size, txt, pos, align, isStroke, font) {
     gCtx.lineJoin = "miter"
     gCtx.miterLimit = 2;
     gCtx.strokeText(txt, gElCanvas.width / 2, pos * gElCanvas.height)
-    if (isStroke) return
-    gCtx.fillText(txt, gElCanvas.width / 2, pos * gElCanvas.height)
+    if (!isStroke) {
+        gCtx.fillText(txt, gElCanvas.width / 2, pos * gElCanvas.height)
+    }
+    if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, pos)
 }
 
 function drawTextRect(txt, pos) {

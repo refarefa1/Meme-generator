@@ -1,14 +1,12 @@
 'use strict'
 
 var gUser = {
-    isClicked: false,
-    isSaving: false
+    isSaving: false,
 }
 var gSavedMemes = []
 var gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
-    url: '',
     lines: [
         {
             txt: 'TEXT',
@@ -17,7 +15,7 @@ var gMeme = {
             align: 'center',
             color: 'white',
             pos: 0.2,
-            isStroke: false
+            isStroke: false,
         },
         {
             txt: 'TEXT',
@@ -26,12 +24,40 @@ var gMeme = {
             align: 'center',
             color: 'white',
             pos: 0.9,
-            isStroke: false
+            isStroke: false,
         }
     ]
 }
 
-function getUser(){
+function resetMeme() {
+    gMeme = {
+        selectedImgId: 0,
+        selectedLineIdx: 0,
+        url: '',
+        lines: [
+            {
+                txt: 'TEXT',
+                font: 'impact',
+                size: 50,
+                align: 'center',
+                color: 'white',
+                pos: 0.2,
+                isStroke: false
+            },
+            {
+                txt: 'TEXT',
+                font: 'impact',
+                size: 50,
+                align: 'center',
+                color: 'white',
+                pos: 0.9,
+                isStroke: false
+            }
+        ]
+    }
+}
+
+function getUser() {
     return gUser
 }
 
