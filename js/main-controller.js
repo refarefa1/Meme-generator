@@ -29,8 +29,6 @@ function onToggleMenu() {
     document.querySelector('.black-screen').classList.toggle('menu-open')
 }
 
-// LISTENERS
-
 function addListeners() {
     addImgListeners()
     addMouseListeners()
@@ -46,10 +44,10 @@ function addMouseListeners() {
     gElCanvas.addEventListener('mousemove', onMove)
     gElCanvas.addEventListener('mousedown', onDown)
     gElCanvas.addEventListener('mouseup', onUp)
-}
-
-function addTouchListeners() {
+  }
+  
+  function addTouchListeners() {
     gElCanvas.addEventListener('touchmove', onMove)
     gElCanvas.addEventListener('touchstart', onDown)
     gElCanvas.addEventListener('touchend', onUp)
-}
+  }

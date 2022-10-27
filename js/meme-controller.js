@@ -18,7 +18,6 @@ function renderMeme() {
 
 }
 
-
 function drawText(color, size, txt, align, isStroke, font, idx) {
     const meme = getMeme()
     const user = getUser()
@@ -51,12 +50,9 @@ function drawTextRect(txt, idx) {
 }
 
 function onDown(ev) {
-    //Get the ev pos from mouse or touch
     const pos = getEvPos(ev)
     if (!isTextClicked(pos)) return
-    console.log('TOUCH!');
 
-    //Save the pos we start from 
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
 
@@ -68,7 +64,6 @@ function onMove(ev) {
     const meme = getMeme()
     const lineIdx = meme.selectedLineIdx
     const pos = getEvPos(ev)
-    //Calc the delta , the diff we moved
     const dx = pos.x - meme.lines[lineIdx].position.x
     const dy = pos.y - meme.lines[lineIdx].position.y
 
@@ -82,24 +77,6 @@ function onUp() {
     user.isDrag = false
     document.body.style.cursor = 'grab'
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function renderSavedMeme(idx) {
     const user = getUser()
@@ -217,11 +194,10 @@ function onDownloadImg(elLink) {
     elLink.href = imgContent
 }
 
-function setTextLocation(){
+function setTextLocation() {
     const meme = getMeme()
     const lines = meme.lines
     lines.forEach((line, idx) => {
-        console.log(line);
         line.position.x = gElCanvas.width / 2
         if (idx === 1) line.position.y = gElCanvas.height - 50
     })
