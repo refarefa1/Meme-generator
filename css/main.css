@@ -54,12 +54,10 @@ input {
     font-size: 1em;
 }
 
-input[type=color] {
-    width: 100%;
-}
-
 button {
     border: none;
+    padding: 0;
+    margin: 0;
 }
 
 .main-layout>* {
@@ -251,36 +249,23 @@ canvas {
 
 .features-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
     grid-template-areas:
-        '. minus color plus .'
-        'line line line line line'
-        'add switch . . .'
+        'text text text'
+        'plus switch minus'
+        'add color delete'
+        'align-left align-center align-right'
+        'select select stroke'
+        'emoji1 emoji2 emoji3'
+        'emoji4 emoji5 download'
+        'share share share'
+        'save save save'
     ;
+    gap: 10px;
 }
-
-.features-container>* {
-    margin-top: 20px;
-}
-
-.features-container button,
-.features-container .color-input {
-    background-color: var(--clr3);
-    color: var(--clr8);
-    border-radius: 1em;
-    aspect-ratio: 1/1;
-}
-
 
 .features-container .text-input {
-    grid-area: line;
-}
-
-.features-container .color-input {
-    grid-area: color;
-    height: inherit;
-
+    grid-area: text;
 }
 
 .features-container .plus {
@@ -299,9 +284,117 @@ canvas {
     grid-area: switch;
 }
 
-@media only screen and (min-width: 820px) {
-    
-    
+.features-container .color {
+    position: relative;
+    grid-area: color;
+}
+
+.features-container .color-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.features-container .align-left {
+    grid-area: align-left;
+}
+
+.features-container .align-center {
+    grid-area: align-center;
+}
+
+.features-container .align-right {
+    grid-area: align-right;
+}
+
+.features-container .select {
+    grid-area: select;
+    padding-left: 20px;
+}
+
+.features-container .stroke {
+    grid-area: stroke;
+}
+
+.features-container .delete {
+    grid-area: delete;
+}
+
+.features-container .emoji1 {
+    grid-area: emoji1;
+}
+
+.features-container .emoji2 {
+    grid-area: emoji2;
+}
+
+.features-container .emoji3 {
+    grid-area: emoji3;
+}
+
+.features-container .emoji4 {
+    grid-area: emoji4;
+}
+
+.features-container .emoji5 {
+    grid-area: emoji5;
+}
+
+.features-container .share {
+    grid-area: share;
+}
+
+.features-container .download {
+    grid-area: download;
+}
+
+.features-container .save {
+    grid-area: save;
+    font-size: 1em;
+    font-family: raleway-regular;
+}
+
+.features-container>* {
+    background-color: var(--clr3);
+    color: var(--clr8);
+    border-radius: 1em;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+    transition: .6s;
+}
+
+.features-container>a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.features-container :not(.emoji):hover {
+    background-color: #1a1b1d;
+}
+
+.features-container .emoji {
+    background-color: transparent;
+    font-size: 3em;
+    line-height: 0;
+}
+
+.features-container .text-input {
+    margin-top: 10px;
+    grid-column: 1/-1;
+}
+
+.features-container .select {
+    height: inherit;
+}
+
+@media only screen and (min-width: 890px) {
+
+
     .main-nav .nav-content .menu>*:not(:last-child) {
         border: none;
     }
@@ -323,6 +416,10 @@ canvas {
         display: none;
     }
 
+    .black-screen{
+        display: none;
+    }
+
     .main-content .gallery-container {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -335,23 +432,47 @@ canvas {
         width: 30%;
     }
 
-    .fa.plus::before,
-    .fa.minus::before,
-    .fa.add::before,
-    .fa.switch::before {
-        font-size: 2.5em;
-    }
-
-    .meme-editor-container{
+    .meme-editor-container {
         height: 500px;
         display: flex;
     }
+
+    .meme-editor-container .features-container {
+        padding-right: 15px;
+        padding-left: 15px;
+        grid-template-columns: repeat(5, 1fr);
+
+        grid-template-areas:
+            'text text text text text'
+            '. plus switch minus .'
+            'color align-left align-center align-right add'
+            'select select select stroke delete'
+            'emoji1 emoji2 emoji3 emoji4 emoji5'
+            'share share share download download'
+            'save save save save save'
+        ;
+    }
+
+    .meme-editor-container .canvas-container {
+        flex-basis: 65%;
+        padding-left: 15px;
+    }
+
+    .features-container>* {
+        margin-top: 0;
+    }
+
+    .meme-editor-container .features-container>*:not(.text-input) {
+        width: auto;
+        height: auto;
+    }
+
 
 }
 
 @media only screen and (min-width: 1200px) {
 
-    
+
 
     .main-content .filter-container .search-filter,
     .main-content .filter-container .tags-container {
@@ -364,7 +485,6 @@ canvas {
 
     .main-content .filter-container .tags-container .tags {
         flex-basis: 65%;
-        margin-left: auto;
         margin-right: auto;
     }
 
@@ -372,7 +492,7 @@ canvas {
         grid-template-columns: repeat(5, 1fr);
     }
 
-    .meme-editor-container{
+    .meme-editor-container {
         height: 700px;
     }
 }

@@ -10,13 +10,16 @@ function onInit() {
     addListeners()
 }
 
-
-
 function onChangePage(page) {
+    document.querySelector('.meme-editor-container').classList.add('hide')
     if (page === 'gallery') {
-        document.querySelector('.meme-editor-container').classList.add('hide')
         document.querySelector('.main-content').classList.remove('hide')
+        document.querySelector('.saved-memes').classList.add('hide')
+    } else if (page === 'memes') {
+        document.querySelector('.main-content').classList.add('hide')
+        document.querySelector('.saved-memes').classList.remove('hide')
     }
+
     onToggleMenu()
 }
 

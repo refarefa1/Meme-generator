@@ -1,25 +1,90 @@
 'use strict'
 
+var gSavedMemes = []
 var gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
     url: '',
     lines: [
         {
-            txt: '',
-            size: 30,
+            txt: 'TEXT',
+            font: 'impact',
+            size: 50,
             align: 'center',
             color: 'white',
-            pos:0.2
+            pos: 0.2,
+            isStroke: false
         },
         {
-            txt: '',
-            size: 30,
+            txt: 'TEXT',
+            font: 'impact',
+            size: 50,
             align: 'center',
             color: 'white',
-            pos:0.9
+            pos: 0.9,
+            isStroke: false
         }
     ]
+}
+
+function setSavedMeme(idx) {
+    const savedMemes = loadFromStorage('savedMemesDB')
+    gMeme = savedMemes[idx]
+}
+
+function saveMeme() {
+    const url = gMeme.url
+    const meme = JSON.parse(JSON.stringify(gMeme));
+    meme.url = url
+    gSavedMemes.push(meme)
+    saveToStorage('savedMemesDB', gSavedMemes)
+    const savedMemes = loadFromStorage('savedMemesDB')
+    return savedMemes
+}
+
+function changeFont(font) {
+    var lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].font = font
+}
+
+function chooseEmoji(emoji) {
+    addLine(emoji)
+}
+
+function checkIfStroke() {
+    var lineIdx = gMeme.selectedLineIdx
+    return gMeme.lines[lineIdx].isStroke
+}
+
+function strokeText() {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].isStroke = !gMeme.lines[lineIdx].isStroke
+}
+
+function deleteLine() {
+    gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+    if (!gMeme.lines[gMeme.selectedLineIdx]) gMeme.selectedLineIdx--
+}
+
+function alignText(direction) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].align = direction
+}
+
+function addLine(txt = 'TEXT') {
+    const line = {
+        txt,
+        font: 'impact',
+        size: 50,
+        align: 'center',
+        color: 'white',
+        pos: 0.5,
+        isStroke: false
+    }
+    gMeme.lines.push(line)
+    const lastLine = gMeme.lines.length - 1
+    gMeme.selectedLineIdx = lastLine
+    console.log(gMeme);
 }
 
 function setLineTxt(txt) {

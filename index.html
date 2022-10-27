@@ -11,9 +11,6 @@
 
 <body class="main-layout" onload="onInit()">
 
-
-
-
     <nav class="main-nav gradient full main-layout">
         <section class="nav-content flex space-between align-center">
             <section class="logo fr">
@@ -34,6 +31,7 @@
 
     <section onclick="onToggleMenu()" class="black-screen full"></section>
 
+
     <main class="main-content main-layout">
         <section class="filter-container flex column">
             <input class="search-filter frr" type="search" placeholder="Search">
@@ -46,41 +44,47 @@
         </section>
     </main>
 
+
     <section class="meme-editor-container main-layout hide">
         <section class="canvas-container flex justify-center">
             <canvas id="my-canvas" width="0" height="0"></canvas>
         </section>
-        <section class="features-container">
+        <section class="features-container flex wrap">
             <input oninput="onDrawText(this.value)" class="text-input" type="text" placeholder="Your text here...">
-            <input oninput="onChangeColor(this.value)" class="color-input" type="color" value="#ffffff">
+            <button class="fa color"><input oninput="onChangeColor(this.value)" class="color-input" type="color" value="#ffffff"></button>
             <button class="fa plus" onclick="onChangeSize(2)"></button>
             <button class="fa minus" onclick="onChangeSize(-2)"></button>
-            <button class="fa add"></button>
+            <button class="fa add" onclick="onAddLine()"></button>
             <button class="fa switch" onclick="onSwitchLine()"></button>
+            <button class="fa align-left" onclick="onAlignText('right')"></button>
+            <button class="fa align-center" onclick="onAlignText('center')"></button>
+            <button class="fa align-right" onclick="onAlignText('left')"></button>
+            <select class="fa select" onclick="onChangeFont(this.value)">
+                <option value="impact">Impact</option>
+                <option value="righteous">Righteous</option>
+                <option value="raleway-regular">Raleway</option>
+            </select>
+            <button class="fa stroke" onclick="onStrokeText()"></button>
+            <button class="fa delete" onclick="onDeleteLine()"></button>
+            <button class="fa emoji emoji1" onclick="onChooseEmoji(this.innerText)">🤑</button>
+            <button class="fa emoji emoji2" onclick="onChooseEmoji(this.innerText)">🤤</button>
+            <button class="fa emoji emoji3" onclick="onChooseEmoji(this.innerText)">🥴</button>
+            <button class="fa emoji emoji4" onclick="onChooseEmoji(this.innerText)">🤗</button>
+            <button class="fa emoji emoji5" onclick="onChooseEmoji(this.innerText)">🤓</button>
+            <a class="fa share" href="#"></a>
+            <a class="fa download" href="#" download="my-meme" onclick="onDownloadImg(this)"></a>
+            <button class="save" onclick="onSaveMeme()">Save meme</button>
         </section>
     </section>
 
+    
+
+    <section class="saved-memes main-content main-layout hide">
+        <section class="saved-gallery-container gallery-container"></section>
+    </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <script src="js/service/storage-service.js"></script>
     <script src="js/service/util-service.js"></script>
     <script src="js/service/gallery-service.js"></script>
     <script src="js/service/meme-service.js"></script>

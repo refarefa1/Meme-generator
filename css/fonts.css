@@ -30,7 +30,6 @@
 .fa.plus::before,
 .fa.minus::before{
     content: "\f031";
-    font-size: 1.5em;
 }
 
 .fa.plus::after{
@@ -43,12 +42,42 @@
 
 .fa.add::before{
     content: "\2b";
-    font-size: 1.5em;
 }
 
 .fa.switch::before{
     content: "\f07d";
-    font-size: 1.5em;
+}
+
+.fa.align-left::before{
+    content: "\f036";
+}
+
+.fa.align-center::before{
+    content: "\f039";
+}
+
+.fa.align-right::before{
+    content: "\f038";
+}
+
+.fa.delete::before{
+    content: "\58";
+}
+
+.fa.share::before{
+    content: "\f064";
+}
+
+.fa.download::before{
+    content: "\f019";
+}
+
+.fa.color::before{
+    content: "\f53f";
+}
+
+.fa.stroke::before{
+    content: "\f065";
 }
 
 .frr {
