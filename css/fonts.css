@@ -23,60 +23,60 @@
     src: url(../fonts/fa/fa-solid-900.ttf);
 }
 
-.fa{
+.fa {
     font-family: fa;
 }
 
 .fa.plus::before,
-.fa.minus::before{
+.fa.minus::before {
     content: "\f031";
 }
 
-.fa.plus::after{
+.fa.plus::after {
     content: "\2b";
 }
 
-.fa.minus::after{
+.fa.minus::after {
     content: "\f068";
 }
 
-.fa.add::before{
+.fa.add::before {
     content: "\2b";
 }
 
-.fa.switch::before{
+.fa.switch::before {
     content: "\f07d";
 }
 
-.fa.align-left::before{
+.fa.align-left::before {
     content: "\f036";
 }
 
-.fa.align-center::before{
+.fa.align-center::before {
     content: "\f039";
 }
 
-.fa.align-right::before{
+.fa.align-right::before {
     content: "\f038";
 }
 
-.fa.delete::before{
+.fa.delete::before {
     content: "\58";
 }
 
-.fa.share::before{
+.fa.share::before {
     content: "\f064";
 }
 
-.fa.download::before{
+.fa.download::before {
     content: "\f019";
 }
 
-.fa.color::before{
+.fa.color::before {
     content: "\f53f";
 }
 
-.fa.stroke::before{
+.fa.stroke::before {
     content: "\f065";
 }
 

@@ -54,21 +54,20 @@ function drawTextRect(txt, idx) {
 function onDown(ev) {
     const pos = getEvPos(ev)
     if (!isTextClicked(pos)) return
-
+    setDrag()
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
 
 }
 
 function onMove(ev) {
+    const pos = getEvPos(ev)
     const { isDrag } = getUser()
     if (!isDrag) return
     const meme = getMeme()
     const lineIdx = meme.selectedLineIdx
-    const pos = getEvPos(ev)
     const dx = pos.x - meme.lines[lineIdx].position.x
     const dy = pos.y - meme.lines[lineIdx].position.y
-
     moveText(dx, dy)
     renderMeme()
 
@@ -79,24 +78,6 @@ function onUp() {
     user.isDrag = false
     document.body.style.cursor = 'grab'
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function renderSavedMeme(idx) {
     const user = getUser()
@@ -209,16 +190,14 @@ function resizeCanvas() {
 }
 
 function onDownloadImg(elLink) {
-    console.log('downloading...');
     const imgContent = gElCanvas.toDataURL()
-    elLink.href = imgContent
+        elLink.href = imgContent
 }
 
-function setTextLocation(){
+function setTextLocation() {
     const meme = getMeme()
     const lines = meme.lines
     lines.forEach((line, idx) => {
-        console.log(line);
         line.position.x = gElCanvas.width / 2
         if (idx === 1) line.position.y = gElCanvas.height - 50
     })
