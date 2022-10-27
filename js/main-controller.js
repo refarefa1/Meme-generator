@@ -32,9 +32,23 @@ function onToggleMenu() {
 
 function addListeners() {
     addImgListeners()
+    addMouseListeners()
+    addTouchListeners()
 }
 
 function addImgListeners() {
     const imgs = document.querySelectorAll('.gallery-container img')
     imgs.forEach(img => img.addEventListener('click', onImgSelect))
+}
+
+function addMouseListeners() {
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mousedown', onDown)
+    gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchend', onUp)
 }

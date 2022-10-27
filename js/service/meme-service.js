@@ -1,5 +1,9 @@
 'use strict'
 
+var gUser = {
+    isClicked: false,
+    isSaving: false
+}
 var gSavedMemes = []
 var gMeme = {
     selectedImgId: 0,
@@ -25,6 +29,14 @@ var gMeme = {
             isStroke: false
         }
     ]
+}
+
+function getUser(){
+    return gUser
+}
+
+function getImgById(id) {
+    return gImgs.find(img => img.id === id)
 }
 
 function setSavedMeme(idx) {
