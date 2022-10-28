@@ -168,62 +168,69 @@ function deleteLine() {
 }
 
 function alignText(direction) {
-    const lineIdx = gMeme.selectedLineIdx
-    gMeme.lines[lineIdx].align = direction
-}
-
-function addLine(txt = 'TEXT') {
-    const line = {
-        txt,
-        font: 'impact',
-        size: 50,
-        align: 'center',
-        color: 'white',
-        position: {
-            x: gElCanvas.width / 2,
-            y: gElCanvas.height / 2
-        },
-        isStroke: false
+    const line = gMeme.lines[gMeme.selectedLineIdx]
+    switch (direction) {
+        case 'right': line.position.x = gElCanvas.width * 0.8
+            break
+        case 'left': line.position.x = gElCanvas.width * 0.2
+            break
+        case 'center': line.position.x = gElCanvas.width * 0.5
+            break
     }
-    gMeme.lines.push(line)
-    const lastLine = gMeme.lines.length - 1
-    gMeme.selectedLineIdx = lastLine
-    console.log(gMeme);
-}
 
-function setLineTxt(txt) {
-    const lineIdx = gMeme.selectedLineIdx
-    gMeme.lines[lineIdx].txt = txt
-}
 
-function switchLine() {
-    gMeme.selectedLineIdx++
-    if (gMeme.selectedLineIdx === gMeme.lines.length) gMeme.selectedLineIdx = 0
-    return gMeme.selectedLineIdx
-}
+    function addLine(txt = 'TEXT') {
+        const line = {
+            txt,
+            font: 'impact',
+            size: 50,
+            align: 'center',
+            color: 'white',
+            position: {
+                x: gElCanvas.width / 2,
+                y: gElCanvas.height / 2
+            },
+            isStroke: false
+        }
+        gMeme.lines.push(line)
+        const lastLine = gMeme.lines.length - 1
+        gMeme.selectedLineIdx = lastLine
+        console.log(gMeme);
+    }
 
-function changeSize(size) {
-    const lineIdx = gMeme.selectedLineIdx
-    gMeme.lines[lineIdx].size += size
+    function setLineTxt(txt) {
+        const lineIdx = gMeme.selectedLineIdx
+        gMeme.lines[lineIdx].txt = txt
+    }
 
-}
+    function switchLine() {
+        gMeme.selectedLineIdx++
+        if (gMeme.selectedLineIdx === gMeme.lines.length) gMeme.selectedLineIdx = 0
+        return gMeme.selectedLineIdx
+    }
 
-function changeColor(color) {
-    const lineIdx = gMeme.selectedLineIdx
-    gMeme.lines[lineIdx].color = color
-}
+    function changeSize(size) {
+        const lineIdx = gMeme.selectedLineIdx
+        gMeme.lines[lineIdx].size += size
 
-function setImg(elImg) {
-    gMeme.selectedImgId = elImg.dataset.id
-}
+    }
 
-function getImgs() {
-    return gImgs
-}
+    function changeColor(color) {
+        const lineIdx = gMeme.selectedLineIdx
+        gMeme.lines[lineIdx].color = color
+    }
 
-function getMeme() {
-    return gMeme
-}
+    function setImg(elImg) {
+        gMeme.selectedImgId = elImg.dataset.id
+    }
+
+    function getImgs() {
+        return gImgs
+    }
+
+    function getMeme() {
+        return gMeme
+    }
 
 
 

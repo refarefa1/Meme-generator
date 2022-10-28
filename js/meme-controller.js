@@ -182,11 +182,9 @@ function resizeCanvas() {
     if (window.innerWidth < 890) {
         gElCanvas.width = elContainer.offsetWidth - 40
         gElCanvas.height = elContainer.offsetWidth - 40
-        renderNoLoad()
     } else {
         gElCanvas.width = elContainer.offsetHeight - 50
         gElCanvas.height = elContainer.offsetHeight - 50
-        renderNoLoad()
     }
     renderMeme()
 }
@@ -221,16 +219,4 @@ function onDownloadImg() {
         xhr.send();
     }, 500)
     setTimeout(() => user.isSaving = false, 1000)
-}
-
-function renderNoLoad() {
-    const meme = getMeme()
-    const currImg = getImgById(meme.selectedImgId)
-    const img = new Image()
-    img.src = currImg.url
-    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-    const lines = meme.lines
-    lines.forEach(({ color, size, txt, align, isStroke, font }, idx) => {
-        drawText(color, size, txt, align, isStroke, font, idx)
-    })
 }
