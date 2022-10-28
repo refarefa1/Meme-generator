@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme generator</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/fonts.css">
 </head>
 
 <body class="main-layout" onload="onInit()">
@@ -16,7 +15,7 @@
     <nav class="main-nav gradient full main-layout">
         <section class="nav-content flex space-between align-center">
             <section class="logo fr">
-                <h1>MEME-GEN</h1>
+                <h1 onclick="onChangePage('gallery')">MEME-GEN</h1>
             </section>
             <section onclick="onToggleMenu()" class="burger flex column align-center justify-center">
                 <div></div>
@@ -39,7 +38,7 @@
             <input class="search-filter frr" type="search" placeholder="Search">
             <section class="tags-container flex space-between">
                 <section class="tags">Funny animal bla bla bla</section>
-                <button class="tags-btn gradient frr">More</button>
+                <button class="tags-btn gradient fa more"></button>
             </section>
         </section>
         <section class="gallery-container">
@@ -61,7 +60,7 @@
             <button class="fa align-left" onclick="onAlignText('right')"></button>
             <button class="fa align-center" onclick="onAlignText('center')"></button>
             <button class="fa align-right" onclick="onAlignText('left')"></button>
-            <select class="fa select" onclick="onChangeFont(this.value)">
+            <select class="frr select" onclick="onChangeFont(this.value)">
                 <option value="impact">Impact</option>
                 <option value="righteous">Righteous</option>
                 <option value="raleway-regular">Raleway</option>
@@ -74,8 +73,8 @@
             <button class="fa emoji emoji4" onclick="onChooseEmoji(this.innerText)">🤗</button>
             <button class="fa emoji emoji5" onclick="onChooseEmoji(this.innerText)">🤓</button>
             <a class="fa share" href="#"></a>
-            <a class="fa download" href="#" download="my-meme" onclick="onDownloadImg(this)"></a>
-            <button class="save" onclick="onSaveMeme()">Save meme</button>
+            <button class="fa download" onclick="onDownloadImg()"></button>
+            <button class="save gradient" onclick="onSaveMeme()">Save meme</button>
         </section>
     </section>
 

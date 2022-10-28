@@ -15,9 +15,7 @@ function renderMeme() {
             drawText(color, size, txt, align, isStroke, font, idx)
         })
     }
-
 }
-
 
 function drawText(color, size, txt, align, isStroke, font, idx) {
     const meme = getMeme()
@@ -54,16 +52,20 @@ function drawTextRect(txt, idx) {
 function onDown(ev) {
     const pos = getEvPos(ev)
     if (!isTextClicked(pos)) return
-    setDrag()
-    gStartPos = pos
+    setDrag(true)
+    renderMeme()
     document.body.style.cursor = 'grabbing'
 
 }
 
 function onMove(ev) {
     const pos = getEvPos(ev)
+
+    document.body.style.cursor = isTextClicked(pos) ? 'grab' : 'auto'
+
     const { isDrag } = getUser()
     if (!isDrag) return
+    document.body.style.cursor = 'grabbing'
     const meme = getMeme()
     const lineIdx = meme.selectedLineIdx
     const dx = pos.x - meme.lines[lineIdx].position.x
@@ -74,9 +76,7 @@ function onMove(ev) {
 }
 
 function onUp() {
-    const user = getUser()
-    user.isDrag = false
-    document.body.style.cursor = 'grab'
+    setDrag(false)
 }
 
 function renderSavedMeme(idx) {
@@ -104,6 +104,7 @@ function onSaveMeme() {
         document.querySelector('.saved-memes').classList.remove('hide')
         document.querySelector('.meme-editor-container').classList.add('hide')
     }, 1)
+    setTimeout(() => user.isSaving = false, 1000)
 }
 
 function onChangeFont(font) {
@@ -179,19 +180,15 @@ function onImgSelect() {
 function resizeCanvas() {
     const elContainer = document.querySelector('.meme-editor-container')
     if (window.innerWidth < 890) {
-        gElCanvas.width = elContainer.offsetWidth - 50
-        gElCanvas.height = elContainer.offsetWidth - 50
+        gElCanvas.width = elContainer.offsetWidth - 40
+        gElCanvas.height = elContainer.offsetWidth - 40
+        renderNoLoad()
     } else {
         gElCanvas.width = elContainer.offsetHeight - 50
         gElCanvas.height = elContainer.offsetHeight - 50
+        renderNoLoad()
     }
-    setTextLocation()
     renderMeme()
-}
-
-function onDownloadImg(elLink) {
-    const imgContent = gElCanvas.toDataURL()
-        elLink.href = imgContent
 }
 
 function setTextLocation() {
@@ -200,5 +197,40 @@ function setTextLocation() {
     lines.forEach((line, idx) => {
         line.position.x = gElCanvas.width / 2
         if (idx === 1) line.position.y = gElCanvas.height - 50
+    })
+}
+
+function onDownloadImg() {
+    const user = getUser()
+    user.isSaving = true
+    renderMeme()
+    setTimeout(() => {
+        let canvasImage = document.getElementById('my-canvas').toDataURL('image/png');
+        let xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function () {
+            let a = document.createElement('a');
+            a.href = window.URL.createObjectURL(xhr.response);
+            a.download = 'my-meme.png';
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        };
+        xhr.open('GET', canvasImage)
+        xhr.send();
+    }, 500)
+    setTimeout(() => user.isSaving = false, 1000)
+}
+
+function renderNoLoad() {
+    const meme = getMeme()
+    const currImg = getImgById(meme.selectedImgId)
+    const img = new Image()
+    img.src = currImg.url
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+    const lines = meme.lines
+    lines.forEach(({ color, size, txt, align, isStroke, font }, idx) => {
+        drawText(color, size, txt, align, isStroke, font, idx)
     })
 }

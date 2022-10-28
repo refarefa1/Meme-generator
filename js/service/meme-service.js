@@ -4,7 +4,6 @@
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 
-var gStartPos
 var gUser = {
     isSaving: false,
     isDrag: false
@@ -48,8 +47,8 @@ function moveText(dx, dy) {
 
 }
 
-function setDrag() {
-    gUser.isDrag = true
+function setDrag(bool) {
+    gUser.isDrag = bool
 }
 
 function isTextClicked(pos) {
@@ -57,7 +56,7 @@ function isTextClicked(pos) {
     return lines.some((line, idx) => {
         const textWidth = gCtx.measureText(line.txt).width
         const textHeight = gCtx.measureText(line.txt).fontBoundingBoxAscent + gCtx.measureText(line.txt).fontBoundingBoxDescent
-        gMeme.selectedLineIdx = idx
+        if (!gUser.isDrag) gMeme.selectedLineIdx = idx
         return (pos.x < line.position.x + textWidth / 2 + 20 &&
             pos.x > line.position.x - textWidth / 2 - 20 &&
             pos.y < line.position.y + textHeight / 2 + 20 &&

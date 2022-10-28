@@ -1,3 +1,4 @@
+@import url("fonts.css");
 
 :root {
     --clr1: #129EAD;
@@ -8,11 +9,32 @@
     --clr8: #ffffff;
 }
 
-/* BASICS */
+/* scroll-bar */
+
+html {
+    --scrollbarBG: #CFD8DC;
+    --thumbBG: #90A4AE;
+  }
+  body::-webkit-scrollbar {
+    width: 20px;
+  }
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  }
+  body::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border: 3px solid var(--scrollbarBG);
+  }
 
 * {
     box-sizing: border-box;
 }
+
+/* BASICS */
 
 body {
     margin: 0;
@@ -45,7 +67,6 @@ h1 {
 }
 
 input {
-    border-radius: 0.8em;
     height: 50px;
     border: none;
     background-color: var(--clr3);
@@ -109,6 +130,10 @@ button {
     background-image: linear-gradient(to right, var(--clr1), var(--clr2));
 }
 
+.b-gradient{
+    background-image: linear-gradient(to right,var(--clr3), var(--clr4));
+}
+
 .main-nav .nav-content .menu.transform-menu {
     transform: translateY(0%);
 }
@@ -122,19 +147,23 @@ button {
     padding-top: 15px;
     padding-bottom: 15px;
     background-color: var(--clr4);
-    border-radius: 0.6em;
 }
 
 .main-content .gallery-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 30px;
 }
 
 .main-content .gallery-container>* {
     width: 100%;
-    border-radius: 1em;
     object-fit: cover;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.main-content .gallery-container>*:hover{
+    scale: 1.05;
 }
 
 /* nav */
@@ -177,7 +206,6 @@ button {
 .main-nav .burger {
     height: 50px;
     width: 50px;
-    border-radius: 2em;
     background-color: var(--clr8);
 }
 
@@ -185,7 +213,6 @@ button {
     width: 50%;
     height: 5px;
     margin: 2px;
-    border-radius: 2em;
     background-color: var(--clr2)
 }
 
@@ -222,7 +249,6 @@ button {
 .filter-container .tags {
     flex-basis: 75%;
     background-color: var(--clr5);
-    border-radius: 2em;
     padding: 1em;
     margin-bottom: 15px;
 }
@@ -232,7 +258,6 @@ button {
     margin-bottom: 15px;
     width: 50px;
     height: inherit;
-    border-radius: 2em;
     color: white;
     border: none;
 }
@@ -359,7 +384,6 @@ canvas {
 .features-container>* {
     background-color: var(--clr3);
     color: var(--clr8);
-    border-radius: 1em;
     width: 100%;
     height: 50px;
     cursor: pointer;
@@ -393,6 +417,9 @@ canvas {
 
 @media only screen and (min-width: 890px) {
 
+    .logo{
+        cursor: pointer;
+    }
 
     .main-nav .nav-content .menu>*:not(:last-child) {
         border: none;
@@ -419,6 +446,13 @@ canvas {
         display: none;
     }
 
+    .fa.more::before{
+        content: "More";
+        font-family: raleway-regular;
+        font-size: 1.5em;
+        letter-spacing: 0.05em;
+    }
+
     .main-content .gallery-container {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -435,6 +469,7 @@ canvas {
         height: 500px;
         display: flex;
     }
+
 
     .meme-editor-container .features-container {
         padding-right: 15px;
@@ -465,7 +500,6 @@ canvas {
         width: auto;
         height: auto;
     }
-
 
 }
 

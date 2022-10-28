@@ -80,6 +80,10 @@
     content: "\f065";
 }
 
+.fa.more::before{
+    content: "\f103";
+}
+
 .frr {
     font-family: raleway-regular;
 }
