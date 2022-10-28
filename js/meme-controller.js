@@ -11,19 +11,19 @@ function renderMeme() {
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         const lines = meme.lines
-        lines.forEach(({ color, size, txt, align, isStroke, font }, idx) => {
-            drawText(color, size, txt, align, isStroke, font, idx)
+        lines.forEach(({ color, size, txt, isStroke, font }, idx) => {
+            drawText(color, size, txt, isStroke, font, idx)
         })
     }
 }
 
-function drawText(color, size, txt, align, isStroke, font, idx) {
+function drawText(color, size, txt, isStroke, font, idx) {
     const meme = getMeme()
     const user = getUser()
     const pos = meme.lines[idx].position
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
-    gCtx.textAlign = align
+    gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle';
     gCtx.textBaseline = 'middle';
     gCtx.lineWidth = isStroke ? 3 : 8
@@ -35,6 +35,7 @@ function drawText(color, size, txt, align, isStroke, font, idx) {
         gCtx.fillText(txt, pos.x, pos.y)
     }
     if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, idx)
+
 }
 
 function drawTextRect(txt, idx) {
@@ -54,25 +55,18 @@ function onDown(ev) {
     if (!isTextClicked(pos)) return
     setDrag(true)
     renderMeme()
-    document.body.style.cursor = 'grabbing'
-
 }
 
 function onMove(ev) {
     const pos = getEvPos(ev)
-
-    document.body.style.cursor = isTextClicked(pos) ? 'grab' : 'auto'
-
     const { isDrag } = getUser()
     if (!isDrag) return
-    document.body.style.cursor = 'grabbing'
     const meme = getMeme()
     const lineIdx = meme.selectedLineIdx
     const dx = pos.x - meme.lines[lineIdx].position.x
     const dy = pos.y - meme.lines[lineIdx].position.y
     moveText(dx, dy)
     renderMeme()
-
 }
 
 function onUp() {

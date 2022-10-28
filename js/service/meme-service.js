@@ -17,7 +17,6 @@ var gMeme = {
             txt: 'TEXT',
             font: 'impact',
             size: 50,
-            align: 'center',
             color: 'white',
             isStroke: false,
             position: {
@@ -29,7 +28,6 @@ var gMeme = {
             txt: 'TEXT',
             font: 'impact',
             size: 50,
-            align: 'center',
             color: 'white',
             isStroke: false,
             position: {
@@ -62,12 +60,9 @@ function isTextClicked(pos) {
             pos.y < line.position.y + textHeight / 2 + 20 &&
             pos.y > line.position.y - textHeight / 2 - 20)
     })
-
-
 }
 
 function getEvPos(ev) {
-
     let pos = {
         x: ev.offsetX,
         y: ev.offsetY
@@ -81,10 +76,6 @@ function getEvPos(ev) {
         }
     }
     return pos
-}
-
-function checkIsDrag(ev) {
-
 }
 
 function resetMeme() {
@@ -170,67 +161,63 @@ function deleteLine() {
 function alignText(direction) {
     const line = gMeme.lines[gMeme.selectedLineIdx]
     switch (direction) {
-        case 'right': line.position.x = gElCanvas.width * 0.8
+        case 'right': line.position.x = gElCanvas.width * 0.7
             break
-        case 'left': line.position.x = gElCanvas.width * 0.2
+        case 'left': line.position.x = gElCanvas.width * 0.3
             break
         case 'center': line.position.x = gElCanvas.width * 0.5
             break
     }
+}
 
-
-    function addLine(txt = 'TEXT') {
-        const line = {
-            txt,
-            font: 'impact',
-            size: 50,
-            align: 'center',
-            color: 'white',
-            position: {
-                x: gElCanvas.width / 2,
-                y: gElCanvas.height / 2
-            },
-            isStroke: false
-        }
-        gMeme.lines.push(line)
-        const lastLine = gMeme.lines.length - 1
-        gMeme.selectedLineIdx = lastLine
-        console.log(gMeme);
+function addLine(txt = 'TEXT') {
+    const line = {
+        txt,
+        font: 'impact',
+        size: 50,
+        color: 'white',
+        position: {
+            x: gElCanvas.width / 2,
+            y: gElCanvas.height / 2
+        },
+        isStroke: false
     }
+    gMeme.lines.push(line)
+    const lastLine = gMeme.lines.length - 1
+    gMeme.selectedLineIdx = lastLine
+    console.log(gMeme);
+}
 
-    function setLineTxt(txt) {
-        const lineIdx = gMeme.selectedLineIdx
-        gMeme.lines[lineIdx].txt = txt
-    }
+function setLineTxt(txt) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].txt = txt
+}
 
-    function switchLine() {
-        gMeme.selectedLineIdx++
-        if (gMeme.selectedLineIdx === gMeme.lines.length) gMeme.selectedLineIdx = 0
-        return gMeme.selectedLineIdx
-    }
+function switchLine() {
+    gMeme.selectedLineIdx++
+    if (gMeme.selectedLineIdx === gMeme.lines.length) gMeme.selectedLineIdx = 0
+    return gMeme.selectedLineIdx
+}
 
-    function changeSize(size) {
-        const lineIdx = gMeme.selectedLineIdx
-        gMeme.lines[lineIdx].size += size
+function changeSize(size) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].size += size
 
-    }
+}
 
-    function changeColor(color) {
-        const lineIdx = gMeme.selectedLineIdx
-        gMeme.lines[lineIdx].color = color
-    }
+function changeColor(color) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].color = color
+}
 
-    function setImg(elImg) {
-        gMeme.selectedImgId = elImg.dataset.id
-    }
+function setImg(elImg) {
+    gMeme.selectedImgId = elImg.dataset.id
+}
 
-    function getImgs() {
-        return gImgs
-    }
+function getImgs() {
+    return gImgs
+}
 
-    function getMeme() {
-        return gMeme
-    }
-
-
-
+function getMeme() {
+    return gMeme
+}

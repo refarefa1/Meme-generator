@@ -1,0 +1,83 @@
+.logo{
+    cursor: pointer;
+}
+
+.main-nav .nav-content .menu>*:not(:last-child) {
+    border: none !important;
+}
+
+.main-nav .nav-content .menu {
+    height: 0px !important;
+    font-size: 1.5em !important;
+    position: static !important;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    transform: translateY(0%) !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    color: white !important;
+    width: fit-content !important;
+}
+
+.main-nav .nav-content .burger {
+    display: none;
+}
+
+.black-screen{
+    display: none;
+}
+
+.fa.more::before{
+    content: "More";
+    font-family: raleway-regular;
+    font-size: 1.5em;
+    letter-spacing: 0.05em;
+}
+
+.main-content .gallery-container {
+    grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.main-content .filter-container .tags-container .tags {
+    width: 60%;
+}
+
+.main-content .filter-container .tags-container .tags-btn {
+    width: 30%;
+}
+
+.meme-editor-container {
+    height: 500px;
+    display: flex;
+}
+
+
+.meme-editor-container .features-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    grid-template-columns: repeat(5, 1fr);
+
+    grid-template-areas:
+        'text text text text text'
+        '. plus switch minus .'
+        'color align-left align-center align-right add'
+        'select select select stroke delete'
+        'emoji1 emoji2 emoji3 emoji4 emoji5'
+        'share share share download download'
+        'save save save save save'
+    ;
+}
+
+.meme-editor-container .canvas-container {
+    flex-basis: 65%;
+    padding-left: 15px;
+}
+
+.features-container>* {
+    margin-top: 0;
+}
+
+.meme-editor-container .features-container>*:not(.text-input) {
+    width: auto;
+    height: auto;
+}

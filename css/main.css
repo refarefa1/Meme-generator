@@ -1,4 +1,6 @@
-@import url("fonts.css");
+@import url("./fonts.css");
+@import url("./tablet.css") (min-width: 890px);
+@import url("./desktop.css") (min-width: 1200px);
 
 :root {
     --clr1: #129EAD;
@@ -415,91 +417,9 @@ canvas {
     height: inherit;
 }
 
-@media only screen and (min-width: 890px) {
+/* @media only screen and (min-width: 890px) {
 
-    .logo{
-        cursor: pointer;
-    }
-
-    .main-nav .nav-content .menu>*:not(:last-child) {
-        border: none;
-    }
-
-    .main-nav .nav-content .menu {
-        height: 0px;
-        font-size: 1.5em;
-        position: static;
-        flex-direction: row;
-        justify-content: flex-end;
-        transform: translateY(0%);
-        background-color: transparent;
-        box-shadow: none;
-        color: white;
-        width: fit-content
-    }
-
-    .main-nav .nav-content .burger {
-        display: none;
-    }
-
-    .black-screen{
-        display: none;
-    }
-
-    .fa.more::before{
-        content: "More";
-        font-family: raleway-regular;
-        font-size: 1.5em;
-        letter-spacing: 0.05em;
-    }
-
-    .main-content .gallery-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .main-content .filter-container .tags-container .tags {
-        width: 60%;
-    }
-
-    .main-content .filter-container .tags-container .tags-btn {
-        width: 30%;
-    }
-
-    .meme-editor-container {
-        height: 500px;
-        display: flex;
-    }
-
-
-    .meme-editor-container .features-container {
-        padding-right: 15px;
-        padding-left: 15px;
-        grid-template-columns: repeat(5, 1fr);
-
-        grid-template-areas:
-            'text text text text text'
-            '. plus switch minus .'
-            'color align-left align-center align-right add'
-            'select select select stroke delete'
-            'emoji1 emoji2 emoji3 emoji4 emoji5'
-            'share share share download download'
-            'save save save save save'
-        ;
-    }
-
-    .meme-editor-container .canvas-container {
-        flex-basis: 65%;
-        padding-left: 15px;
-    }
-
-    .features-container>* {
-        margin-top: 0;
-    }
-
-    .meme-editor-container .features-container>*:not(.text-input) {
-        width: auto;
-        height: auto;
-    }
+   
 
 }
 
@@ -507,25 +427,5 @@ canvas {
 
 
 
-    .main-content .filter-container .search-filter,
-    .main-content .filter-container .tags-container {
-        flex-grow: 1;
-    }
-
-    .main-content .filter-container .tags-container {
-        justify-content: flex-end;
-    }
-
-    .main-content .filter-container .tags-container .tags {
-        flex-basis: 65%;
-        margin-right: auto;
-    }
-
-    .main-content .gallery-container {
-        grid-template-columns: repeat(5, 1fr);
-    }
-
-    .meme-editor-container {
-        height: 700px;
-    }
-}
+    
+} */
