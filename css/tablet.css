@@ -35,7 +35,8 @@
 }
 
 .main-content .gallery-container {
-    grid-template-columns: repeat(3, 1fr) !important;
+    /* grid-template-columns: repeat(3, 1fr) !important; */
+    column-count: 3 !important;
 }
 
 .main-content .filter-container .tags-container .tags {
@@ -46,9 +47,8 @@
     width: 30%;
 }
 
-.meme-editor-container {
-    height: 500px;
-    display: flex;
+.meme-editor-container{
+    height: 100%;
 }
 
 
@@ -56,7 +56,7 @@
     padding-right: 15px;
     padding-left: 15px;
     grid-template-columns: repeat(5, 1fr);
-
+    width: 100%;
     grid-template-areas:
         'text text text text text'
         '. plus switch minus .'
@@ -79,5 +79,5 @@
 
 .meme-editor-container .features-container>*:not(.text-input) {
     width: auto;
-    height: auto;
+    height: 80px;
 }

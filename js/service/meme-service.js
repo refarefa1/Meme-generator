@@ -1,6 +1,6 @@
 'use strict'
 
-
+const EMOJIS = ['🤑', '🤤', '🥴', '🤗', '🤓']
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 

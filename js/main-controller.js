@@ -1,7 +1,7 @@
 'use strict'
 
 function onInit() {
-    
+
     renderGallery()
 
     gElCanvas = document.getElementById('my-canvas')
@@ -11,13 +11,11 @@ function onInit() {
 }
 
 function onChangePage(page) {
-    document.querySelector('.meme-editor-container').classList.add('hide')
-    if (page === 'gallery') {
-        document.querySelector('.main-content').classList.remove('hide')
-        document.querySelector('.saved-memes').classList.add('hide')
-    } else if (page === 'memes') {
-        document.querySelector('.main-content').classList.add('hide')
-        document.querySelector('.saved-memes').classList.remove('hide')
+    switch (page) {
+        case 'gallery': showGallery()
+            break
+        case 'memes': showSavedMemes()
+            break
     }
     resetMeme()
     document.querySelector('.text-input').value = ''

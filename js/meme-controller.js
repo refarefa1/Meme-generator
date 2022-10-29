@@ -1,20 +1,20 @@
 'use strict'
 
+var gElImg
+
 var gElCanvas
 var gCtx
 
 function renderMeme() {
     const meme = getMeme()
-    const currImg = getImgById(meme.selectedImgId)
-    const img = new Image()
-    img.src = currImg.url
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        const lines = meme.lines
-        lines.forEach(({ color, size, txt, isStroke, font }, idx) => {
-            drawText(color, size, txt, isStroke, font, idx)
-        })
+    let img = new Image()
+    img = gElImg
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+    const lines = meme.lines
+    lines.forEach(({ color, size, txt, isStroke, font }, idx) => {
+        drawText(color, size, txt, isStroke, font, idx)
     }
+        )
 }
 
 function drawText(color, size, txt, isStroke, font, idx) {
@@ -34,17 +34,21 @@ function drawText(color, size, txt, isStroke, font, idx) {
     if (!isStroke) {
         gCtx.fillText(txt, pos.x, pos.y)
     }
-    if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, idx)
+    if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, idx, font)
 
 }
 
-function drawTextRect(txt, idx) {
+function drawTextRect(txt, idx, font) {
     const meme = getMeme()
     const pos = meme.lines[idx].position
     const textWidth = gCtx.measureText(txt).width
     const textHeight = gCtx.measureText(txt).fontBoundingBoxAscent + gCtx.measureText(txt).fontBoundingBoxDescent
     const startPosX = pos.x - textWidth / 2
     const startPosY = pos.y - textHeight / 2
+
+    document.querySelector('.text-input').value = txt
+    document.querySelector('.select').value = font
+    document.querySelector('.text-input').disabled = EMOJIS.includes(txt) ? true : false
 
     gCtx.strokeStyle = 'orange'
     gCtx.strokeRect(startPosX - 10, startPosY - 5, textWidth + 20, textHeight + 5)
@@ -76,8 +80,7 @@ function onUp() {
 function renderSavedMeme(idx) {
     const user = getUser()
     user.isSaving = false
-    document.querySelector('.saved-memes').classList.add('hide')
-    document.querySelector('.meme-editor-container').classList.remove('hide')
+    showMemeEditor()
     setSavedMeme(idx)
     renderMeme()
 }
@@ -95,8 +98,7 @@ function onSaveMeme() {
             return `<img onclick="renderSavedMeme(${idx})" src="${imgContent}" data-id=${meme.selectedImgId}>`
         })
         gallery.innerHTML += strHTML.join('')
-        document.querySelector('.saved-memes').classList.remove('hide')
-        document.querySelector('.meme-editor-container').classList.add('hide')
+        showSavedMemes()
     }, 1)
     setTimeout(() => user.isSaving = false, 1000)
 }
@@ -144,8 +146,6 @@ function onAddLine() {
 function onSwitchLine() {
     const lineIdx = switchLine()
     const meme = getMeme()
-    document.querySelector('.text-input').value = meme.lines[lineIdx].txt
-    document.querySelector('.select').value = meme.lines[lineIdx].font
     renderMeme()
 }
 
@@ -162,10 +162,10 @@ function onChangeColor(color) {
 function onImgSelect() {
     const user = getUser()
     user.isSaving = false
-    document.querySelector('.meme-editor-container').classList.remove('hide')
-    document.querySelector('.main-content').classList.add('hide')
+    showMemeEditor()
     setImg(this)
-    resizeCanvas()
+    gElImg = this
+    resizeCanvas(this)
     addEventListener('resize', resizeCanvas);
     setTextLocation()
     renderMeme()
@@ -173,12 +173,15 @@ function onImgSelect() {
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.meme-editor-container')
-    if (window.innerWidth < 890) {
+    if (window.innerWidth < 1240) {
+
         gElCanvas.width = elContainer.offsetWidth - 40
-        gElCanvas.height = elContainer.offsetWidth - 40
+        gElCanvas.height = gElImg.height * gElCanvas.width / gElImg.width
+
     } else {
+
         gElCanvas.width = elContainer.offsetHeight - 50
-        gElCanvas.height = elContainer.offsetHeight - 50
+        gElCanvas.height = gElImg.height * gElCanvas.width / gElImg.width
     }
     renderMeme()
 }
@@ -192,25 +195,20 @@ function setTextLocation() {
     })
 }
 
-function onDownloadImg() {
-    const user = getUser()
-    user.isSaving = true
-    renderMeme()
-    setTimeout(() => {
-        let canvasImage = document.getElementById('my-canvas').toDataURL('image/png');
-        let xhr = new XMLHttpRequest();
-        xhr.responseType = 'blob';
-        xhr.onload = function () {
-            let a = document.createElement('a');
-            a.href = window.URL.createObjectURL(xhr.response);
-            a.download = 'my-meme.png';
-            a.style.display = 'none';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-        };
-        xhr.open('GET', canvasImage)
-        xhr.send();
-    }, 500)
-    setTimeout(() => user.isSaving = false, 1000)
+function showMemeEditor() {
+    document.querySelector('.saved-memes').classList.add('hide')
+    document.querySelector('.main-content').classList.add('hide')
+    document.querySelector('.meme-editor-container').classList.remove('hide')
+}
+
+function showSavedMemes() {
+    document.querySelector('.saved-memes').classList.remove('hide')
+    document.querySelector('.main-content').classList.add('hide')
+    document.querySelector('.meme-editor-container').classList.add('hide')
+}
+
+function showGallery() {
+    document.querySelector('.saved-memes').classList.add('hide')
+    document.querySelector('.main-content').classList.remove('hide')
+    document.querySelector('.meme-editor-container').classList.add('hide')
 }

@@ -1,6 +1,7 @@
 @import url("./fonts.css");
 @import url("./tablet.css") (min-width: 890px);
-@import url("./desktop.css") (min-width: 1200px);
+@import url("./desktop.css") (min-width: 1240px);
+@import url("./wide-desktop.css") (min-width: 1525px);
 
 :root {
     --clr1: #129EAD;
@@ -152,9 +153,7 @@ button {
 }
 
 .main-content .gallery-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    column-count: 2;
 }
 
 .main-content .gallery-container>* {
@@ -162,6 +161,7 @@ button {
     object-fit: cover;
     cursor: pointer;
     transition: .4s;
+    margin-bottom: 10px;
 }
 
 .main-content .gallery-container>*:hover{
@@ -243,32 +243,32 @@ button {
 
 /* filter */
 
-.filter-container input {
+.main-content .filter-container input {
     margin-bottom: 15px;
     height: 50px;
 }
 
-.filter-container .tags {
+.main-content .filter-container .tags {
     flex-basis: 75%;
     background-color: var(--clr5);
     padding: 1em;
     margin-bottom: 15px;
 }
 
-.filter-container button {
+.main-content .filter-container button,
+.main-content .upload input {
     flex-basis: 20%;
     margin-bottom: 15px;
     width: 50px;
     height: inherit;
     color: white;
     border: none;
+    cursor: pointer;
 }
 
-
-/* canvas */
-
-canvas {
-    background-color: aquamarine;
+.main-content .upload input{
+    width: 100%;
+    height: 50px;
 }
 
 /* features */
@@ -276,6 +276,7 @@ canvas {
 .features-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    width: 95%;
     grid-template-areas:
         'text text text'
         'plus switch minus'
@@ -387,7 +388,7 @@ canvas {
     background-color: var(--clr3);
     color: var(--clr8);
     width: 100%;
-    height: 50px;
+    height: 80px;
     cursor: pointer;
     transition: .6s;
 }

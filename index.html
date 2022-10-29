@@ -41,18 +41,22 @@
                 <button class="tags-btn gradient fa more"></button>
             </section>
         </section>
+        <section class="upload">
+            <input onchange="onUploadImg(event)" type="file" class="gradient image-input" accept="image/jpeg, image/jpg">
+        </section>
         <section class="gallery-container">
         </section>
     </main>
 
-    
+
     <section class="meme-editor-container main-layout hide">
         <section class="canvas-container flex justify-center">
             <canvas id="my-canvas" width="0" height="0"></canvas>
         </section>
         <section class="features-container flex wrap">
             <input oninput="onDrawText(this.value)" class="text-input" type="text" placeholder="Your text here...">
-            <button class="fa color"><input oninput="onChangeColor(this.value)" class="color-input" type="color" value="#ffffff"></button>
+            <button class="fa color"><input oninput="onChangeColor(this.value)" class="color-input" type="color"
+                    value="#ffffff"></button>
             <button class="fa plus" onclick="onChangeSize(2)"></button>
             <button class="fa minus" onclick="onChangeSize(-2)"></button>
             <button class="fa add" onclick="onAddLine()"></button>
@@ -84,9 +88,11 @@
 
     <script src="js/service/storage-service.js"></script>
     <script src="js/service/util-service.js"></script>
+    <script src="js/service/file-service.js"></script>
     <script src="js/service/gallery-service.js"></script>
     <script src="js/service/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
+    <script src="js/file-controller.js"></script>
     <script src="js/meme-controller.js"></script>
     <script src="js/main-controller.js"></script>
 

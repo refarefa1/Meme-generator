@@ -13,9 +13,13 @@
     }
 
     .main-content .gallery-container {
-        grid-template-columns: repeat(5, 1fr) !important;
+        column-count: 4 !important;
     }
 
     .meme-editor-container {
-        height: 700px;
+        display: flex;
+        height: 500px;
+    }
+    .meme-editor-container .features-container>*{
+        height: 55px !important;
     }

@@ -1,0 +1,7 @@
+.main-content .gallery-container{
+    column-count: 5 !important;
+}
+
+.meme-editor-container{
+    height: 700px;
+}
