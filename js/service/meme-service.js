@@ -6,7 +6,9 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 var gUser = {
     isSaving: false,
-    isDrag: false
+    isTextClicked: true,
+    isDrag: false,
+    isSizing: false
 }
 var gSavedMemes = []
 var gMeme = {
@@ -38,6 +40,10 @@ var gMeme = {
     ]
 }
 
+function setTextClicked(bool) {
+    gUser.isTextClicked = bool
+}
+
 function moveText(dx, dy) {
     const lineIdx = gMeme.selectedLineIdx
     gMeme.lines[lineIdx].position.x += dx
@@ -49,16 +55,34 @@ function setDrag(bool) {
     gUser.isDrag = bool
 }
 
+function sizeText(dx, dy) {
+    const lineIdx = gMeme.selectedLineIdx
+    gMeme.lines[lineIdx].size += (dx + dy / 2)
+}
+
+function setSizing(bool) {
+    gUser.isSizing = bool
+}
+
+function isSizingClicked(pos) {
+    return (pos.x < gCirclePos.x + 20 && pos.x > gCirclePos.x - 25 &&
+        pos.y < gCirclePos.y + 20 && pos.y > gCirclePos.y - 20)
+}
+
 function isTextClicked(pos) {
     const lines = gMeme.lines
     return lines.some((line, idx) => {
         const textWidth = gCtx.measureText(line.txt).width
         const textHeight = gCtx.measureText(line.txt).fontBoundingBoxAscent + gCtx.measureText(line.txt).fontBoundingBoxDescent
-        if (!gUser.isDrag) gMeme.selectedLineIdx = idx
-        return (pos.x < line.position.x + textWidth / 2 + 20 &&
+
+
+        if (pos.x < line.position.x + textWidth / 2 + 20 &&
             pos.x > line.position.x - textWidth / 2 - 20 &&
             pos.y < line.position.y + textHeight / 2 + 20 &&
-            pos.y > line.position.y - textHeight / 2 - 20)
+            pos.y > line.position.y - textHeight / 2 - 20) {
+            if (!gUser.isDrag && !gUser.isSizing) gMeme.selectedLineIdx = idx
+            return true
+        }
     })
 }
 

@@ -1,6 +1,6 @@
 @import url("./fonts.css");
 @import url("./tablet.css") (min-width: 890px);
-@import url("./desktop.css") (min-width: 1240px);
+@import url("./desktop.css") (min-width: 1000px);
 @import url("./wide-desktop.css") (min-width: 1525px);
 
 :root {
@@ -256,7 +256,7 @@ button {
 }
 
 .main-content .filter-container button,
-.main-content .upload input {
+.main-content .upload-btn {
     flex-basis: 20%;
     margin-bottom: 15px;
     width: 50px;
@@ -266,9 +266,22 @@ button {
     cursor: pointer;
 }
 
-.main-content .upload input{
+.main-content .upload-btn{
     width: 100%;
     height: 50px;
+    position: relative;
+    font-family: raleway-regular;
+    font-size: 1em;
+}
+
+.main-content .upload-btn input{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+
 }
 
 /* features */

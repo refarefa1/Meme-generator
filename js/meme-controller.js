@@ -1,6 +1,8 @@
 'use strict'
 
 var gElImg
+var gStartPos
+var gCirclePos = {}
 
 var gElCanvas
 var gCtx
@@ -14,7 +16,7 @@ function renderMeme() {
     lines.forEach(({ color, size, txt, isStroke, font }, idx) => {
         drawText(color, size, txt, isStroke, font, idx)
     }
-        )
+    )
 }
 
 function drawText(color, size, txt, isStroke, font, idx) {
@@ -34,7 +36,10 @@ function drawText(color, size, txt, isStroke, font, idx) {
     if (!isStroke) {
         gCtx.fillText(txt, pos.x, pos.y)
     }
-    if (meme.selectedLineIdx === idx && !user.isSaving) drawTextRect(txt, idx, font)
+    if (meme.selectedLineIdx === idx && user.isTextClicked ||
+        meme.selectedLineIdx === idx && user.isSizingClicked) {
+        drawTextRect(txt, idx, font)
+    }
 
 }
 
@@ -50,31 +55,64 @@ function drawTextRect(txt, idx, font) {
     document.querySelector('.select').value = font
     document.querySelector('.text-input').disabled = EMOJIS.includes(txt) ? true : false
 
+    gCtx.strokeShadow = 'black'
     gCtx.strokeStyle = 'orange'
-    gCtx.strokeRect(startPosX - 10, startPosY - 5, textWidth + 20, textHeight + 5)
+    gCtx.strokeRect(startPosX - 10, startPosY - 5, textWidth + 20, textHeight + 10)
+    drawArc(startPosX + textWidth + 10, startPosY + textHeight + 5)
+}
+
+function drawArc(x, y) {
+    gCtx.beginPath();
+    gCtx.arc(x, y, 10, 0, 2 * Math.PI);
+    gCtx.fill();
+    gCirclePos.x = x
+    gCirclePos.y = y
 }
 
 function onDown(ev) {
     const pos = getEvPos(ev)
-    if (!isTextClicked(pos)) return
+    gStartPos = pos
+    if (isSizingClicked(pos)) setSizing(true)
+    if (!isTextClicked(pos)) {
+        document.querySelector('.text-input').value = ''
+        document.querySelector('.text-input').disabled = true
+        renderMeme()
+        return
+    }
     setDrag(true)
     renderMeme()
 }
 
 function onMove(ev) {
     const pos = getEvPos(ev)
-    const { isDrag } = getUser()
-    if (!isDrag) return
-    const meme = getMeme()
-    const lineIdx = meme.selectedLineIdx
-    const dx = pos.x - meme.lines[lineIdx].position.x
-    const dy = pos.y - meme.lines[lineIdx].position.y
-    moveText(dx, dy)
-    renderMeme()
+
+    if (isTextClicked(pos)) document.body.style.cursor = 'grab'
+    else if (isSizingClicked(pos)) document.body.style.cursor = 'se-resize'
+    else document.body.style.cursor = 'auto '
+
+
+    const { isDrag, isSizing } = getUser()
+    if (isDrag) {
+        const dx = pos.x - gStartPos.x
+        const dy = pos.y - gStartPos.y
+        moveText(dx, dy)
+        gStartPos = pos
+        renderMeme()
+    }
+    if (isSizing) {
+        const dx = pos.x - gStartPos.x
+        const dy = pos.y - gStartPos.y
+        sizeText(dx, dy)
+        gStartPos = pos
+        renderMeme()
+    }
+
+
 }
 
 function onUp() {
     setDrag(false)
+    setSizing(false)
 }
 
 function renderSavedMeme(idx) {
@@ -173,7 +211,7 @@ function onImgSelect() {
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.meme-editor-container')
-    if (window.innerWidth < 1240) {
+    if (window.innerWidth < 1000) {
 
         gElCanvas.width = elContainer.offsetWidth - 40
         gElCanvas.height = gElImg.height * gElCanvas.width / gElImg.width

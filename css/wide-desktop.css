@@ -5,3 +5,7 @@
 .meme-editor-container{
     height: 700px;
 }
+
+.meme-editor-container .features-container>*{
+    height: 80px !important;
+}

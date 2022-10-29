@@ -42,4 +42,3 @@ function onUploadImg(e) {
     }
     reader.readAsDataURL(e.target.files[0]);
 }
-
