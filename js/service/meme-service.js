@@ -75,7 +75,6 @@ function isTextClicked(pos) {
         const textWidth = gCtx.measureText(line.txt).width
         const textHeight = gCtx.measureText(line.txt).fontBoundingBoxAscent + gCtx.measureText(line.txt).fontBoundingBoxDescent
 
-
         if (pos.x < line.position.x + textWidth / 2 + 20 &&
             pos.x > line.position.x - textWidth / 2 - 20 &&
             pos.y < line.position.y + textHeight / 2 + 20 &&
@@ -84,6 +83,7 @@ function isTextClicked(pos) {
             return true
         }
     })
+
 }
 
 function getEvPos(ev) {

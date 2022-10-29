@@ -59,6 +59,8 @@ function drawTextRect(txt, idx, font) {
     gCtx.strokeStyle = 'orange'
     gCtx.strokeRect(startPosX - 10, startPosY - 5, textWidth + 20, textHeight + 10)
     drawArc(startPosX + textWidth + 10, startPosY + textHeight + 5)
+
+    
 }
 
 function drawArc(x, y) {
