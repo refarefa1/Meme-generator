@@ -69,7 +69,11 @@ function drawTextRect(txt, idx, font) {
     gCtx.strokeRect(startPosX - 10, startPosY - 5, textWidth + 20, textHeight + 10)
     drawArc(startPosX + textWidth + 10, startPosY + textHeight + 5)
 
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 6b441bfdad95374270b3d692f4dd1c9841a9dd7a
 }
 
 function drawArc(x, y) {
