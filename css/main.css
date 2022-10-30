@@ -157,6 +157,7 @@ button {
 .meme-editor-container {
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-top: 100px !important;
 }
 
 .meme-editor-container {

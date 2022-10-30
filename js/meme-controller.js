@@ -267,14 +267,12 @@ function setTextLocation() {
 
 function showMemeEditor() {
     document.querySelector('.saved-memes').classList.add('hide')
-    document.querySelector('.main-hero').classList.add('hide')
     document.querySelector('.main-content').classList.add('hide')
     document.querySelector('.meme-editor-container').classList.remove('hide')
 }
 
 function showSavedMemes() {
     document.querySelector('.main-content').classList.add('hide')
-    document.querySelector('.main-hero').classList.add('hide')
     document.querySelector('.meme-editor-container').classList.add('hide')
     document.querySelector('.saved-memes').classList.remove('hide')
 }
@@ -283,6 +281,5 @@ function showGallery() {
     document.querySelector('.saved-memes').classList.add('hide')
     document.querySelector('.meme-editor-container').classList.add('hide')
     document.querySelector('.main-content').classList.remove('hide')
-    document.querySelector('.main-hero').classList.remove('hide')
 
 }
