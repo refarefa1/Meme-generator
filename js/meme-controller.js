@@ -11,8 +11,11 @@ function renderMeme() {
     const meme = getMeme()
     let img = new Image()
     img = gElImg
+    if (meme.url) img.src = meme.url
+
     gElCanvas.width = gElCanvas.clientWidth
     gElCanvas.height = gElCanvas.clientHeight
+
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     const lines = meme.lines
     lines.forEach(({ color, size, txt, isStroke, font }, idx) => {
@@ -26,14 +29,13 @@ function drawText(color, size, txt, isStroke, font, idx) {
     const user = getUser()
     const pos = meme.lines[idx].position
     gCtx.fillStyle = color
-    gCtx.font = `${size}px ${font}`
     gCtx.textAlign = 'center'
-    gCtx.textBaseline = 'middle';
     gCtx.textBaseline = 'middle';
     gCtx.lineWidth = isStroke ? 3 : 8
     gCtx.strokeStyle = 'black'
     gCtx.lineJoin = "miter"
     gCtx.miterLimit = 2;
+    gCtx.font = `${size}px ${font}`
     gCtx.strokeText(txt, pos.x, pos.y)
 
     const textWidth = gCtx.measureText(txt).width
@@ -45,7 +47,7 @@ function drawText(color, size, txt, isStroke, font, idx) {
     if (!isStroke) {
         gCtx.fillText(txt, pos.x, pos.y)
     }
-    if (meme.selectedLineIdx === idx && user.isTextClicked ||
+    if (meme.selectedLineIdx === idx && user.isTextClicked && !user.isSaving ||
         meme.selectedLineIdx === idx && user.isSizingClicked) {
         drawTextRect(txt, idx, font)
     }
@@ -66,14 +68,18 @@ function drawTextRect(txt, idx, font) {
 
     gCtx.strokeShadow = 'black'
     gCtx.strokeStyle = 'orange'
+    gCtx.lineWidth = 5
     gCtx.strokeRect(startPosX - 10, startPosY - 5, textWidth + 20, textHeight + 10)
     drawArc(startPosX + textWidth + 10, startPosY + textHeight + 5)
 
 }
 
 function drawArc(x, y) {
+    gCtx.strokeStyle = 'black'
+    gCtx.fillStyle = 'orange'
     gCtx.beginPath();
     gCtx.arc(x, y, 10, 0, 2 * Math.PI);
+    gCtx.stroke()
     gCtx.fill();
     gCirclePos.x = x
     gCirclePos.y = y
@@ -86,6 +92,7 @@ function onDown(ev) {
     if (!isTextClicked(pos)) {
         document.querySelector('.text-input').value = ''
         document.querySelector('.text-input').disabled = true
+        if (!isSizingClicked(pos)) gMeme.selectedLineIdx = ''
         renderMeme()
         return
     }
@@ -130,19 +137,41 @@ function renderSavedMeme(idx) {
     renderMeme()
 }
 
+function renderSavedMemes() {
+    const memes = loadFromStorage('savedMemesDB')
+    let strHTML = memes.map((meme, idx) => {
+        return `
+        <section class="saved-meme">
+            <img onclick="renderSavedMeme(${idx})" src="${meme.url}" data-id=${meme.selectedImgId}>
+            <button onclick="onRemoveMeme(${idx})" class="remove-btn">X</button>
+        </section>
+        `
+    })
+    document.querySelector('.saved-gallery-container').innerHTML = strHTML.join('')
+}
+
+function onRemoveMeme(idx) {
+    removeMeme(idx)
+    renderSavedMemes()
+}
+
 function onSaveMeme() {
     const user = getUser()
     user.isSaving = true
     renderMeme()
     setTimeout(() => {
         const imgContent = gElCanvas.toDataURL()
-        const savedMemes = saveMeme()
-        const gallery = document.querySelector('.saved-gallery-container')
-        const strHTML = savedMemes.map((meme, idx) => {
-            if (idx < savedMemes.length - 1) return null
-            return `<img onclick="renderSavedMeme(${idx})" src="${imgContent}" data-id=${meme.selectedImgId}>`
+        const savedMemes = saveMeme(gElImg)
+        let strHTML = savedMemes.map((meme, idx) => {
+            console.log(meme.url);
+            return `
+            <section class="saved-meme">
+                <img onclick="renderSavedMeme(${idx})" src="${imgContent}" data-id=${meme.selectedImgId}>
+                </section>
+                `
+                // <button onclick="onRemoveMeme(${idx})" class="remove-btn">X</button>
         })
-        gallery.innerHTML += strHTML.join('')
+        document.querySelector('.saved-gallery-container').innerHTML = strHTML.join('')
         showSavedMemes()
     }, 1)
     setTimeout(() => user.isSaving = false, 1000)
@@ -211,7 +240,7 @@ function onImgSelect() {
     setImg(this)
     gElImg = this
     resizeCanvas(this)
-    // addEventListener('resize', resizeCanvas);
+    // addEventListener('resize ', resizeCanvas);
     setTextLocation()
     renderMeme()
 }
@@ -238,18 +267,22 @@ function setTextLocation() {
 
 function showMemeEditor() {
     document.querySelector('.saved-memes').classList.add('hide')
+    document.querySelector('.main-hero').classList.add('hide')
     document.querySelector('.main-content').classList.add('hide')
     document.querySelector('.meme-editor-container').classList.remove('hide')
 }
 
 function showSavedMemes() {
-    document.querySelector('.saved-memes').classList.remove('hide')
     document.querySelector('.main-content').classList.add('hide')
+    document.querySelector('.main-hero').classList.add('hide')
     document.querySelector('.meme-editor-container').classList.add('hide')
+    document.querySelector('.saved-memes').classList.remove('hide')
 }
 
 function showGallery() {
     document.querySelector('.saved-memes').classList.add('hide')
-    document.querySelector('.main-content').classList.remove('hide')
     document.querySelector('.meme-editor-container').classList.add('hide')
+    document.querySelector('.main-content').classList.remove('hide')
+    document.querySelector('.main-hero').classList.remove('hide')
+
 }

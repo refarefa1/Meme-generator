@@ -1,6 +1,6 @@
 @import url("./fonts.css");
 @import url("./tablet.css") (min-width: 890px);
-@import url("./desktop.css") (min-width: 1000px);
+@import url("./desktop.css") (min-width: 1260px);
 @import url("./wide-desktop.css") (min-width: 1525px);
 
 :root {
@@ -10,6 +10,10 @@
     --clr4: #383B42;
     --clr5: #87898D;
     --clr8: #ffffff;
+
+    --s: 890px;
+    --m: 1260px;
+    --l: 1525px;
 }
 
 /* scroll-bar */
@@ -48,6 +52,8 @@ body {
     background-color: var(--clr3);
     color: white;
     font-family: raleway-regular;
+    height: 100vh;
+    /* overflow: hidden; */
 }
 
 a {
@@ -147,13 +153,15 @@ button {
 
 /* COMPONENTS */
 
-/* gallery */
-
 .main-content,
 .meme-editor-container {
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+.meme-editor-container {
     background-color: var(--clr4);
+    border-radius: 10px;
 }
 
 .main-content .gallery-container {
@@ -166,6 +174,7 @@ button {
     cursor: pointer;
     transition: .4s;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 
 .main-content .gallery-container>*:hover {
@@ -213,6 +222,7 @@ button {
     height: 50px;
     width: 50px;
     background-color: var(--clr8);
+    border-radius: 10px;
 }
 
 .main-nav .burger>* {
@@ -251,12 +261,24 @@ button {
     text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
 }
 
-.main-content,
-.meme-editor-container {
+.main-content {
     margin-top: 20px;
+    border-radius: 10px;
+}
+
+.meme-editor-container {
+    margin-top: 120px;
+}
+
+.saved-memes {
+    margin-top: 120px;
 }
 
 /* filter */
+
+#my-canvas {
+    border-radius: 10px;
+}
 
 .main-content .filter-container input {
     margin-bottom: 15px;
@@ -272,13 +294,13 @@ button {
 
 .main-content .filter-container button,
 .main-content .upload-btn {
-    flex-basis: 20%;
     margin-bottom: 15px;
-    width: 50px;
+    width: 100%;
     height: inherit;
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 1em;
 }
 
 .main-content .upload-btn {
@@ -415,10 +437,12 @@ button {
 .features-container>* {
     background-color: var(--clr3);
     color: var(--clr8);
+    border-radius: 10px;
     width: 100%;
-    height: 80px;
+    height: 60px;
     cursor: pointer;
     transition: .6s;
+    font-size: 1.2em;
 }
 
 .features-container>a {
@@ -427,8 +451,16 @@ button {
     align-items: center;
 }
 
-.features-container :not(.emoji):hover {
+.features-container :not(.emoji, .text-input):hover {
     background-color: #1a1b1d;
+}
+
+.features-container .text-input:hover {
+    cursor: text;
+}
+
+.features-container .color-input:hover {
+    cursor: pointer;
 }
 
 .features-container .emoji {
@@ -438,23 +470,24 @@ button {
 }
 
 .features-container .text-input {
-    margin-top: 10px;
     grid-column: 1/-1;
+    margin-top: 10px;
+    background-color: var(--clr8);
+    color: var(--clr3);
 }
 
 .features-container .select {
     height: inherit;
 }
 
-/* @media only screen and (min-width: 890px) {
-
-   
-
+.main-footer {
+    height: 50px;
 }
 
-@media only screen and (min-width: 1200px) {
+.main-footer * {
+    font-family: raleway-light;
+}
 
-
-
-    
-} */
+.main-footer span {
+    font-size: 0.8em;
+}

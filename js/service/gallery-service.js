@@ -5,7 +5,11 @@ var gImgs = createImgs()
 var gMemes
 
 function createImgs() {
-    let imgs = getMemes()
+    let imgs = []
+    for (var i = 1; i < 24; i++) {
+        const img = createImg(`img/memes/${i}`)
+        imgs.push(img)
+    }
     return imgs
 }
 
@@ -30,3 +34,6 @@ function getMemes() {
     xhttp.send();
 }
 
+function getImgs() {
+    return gImgs
+}

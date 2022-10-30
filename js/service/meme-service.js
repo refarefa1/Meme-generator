@@ -16,7 +16,7 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'TEXT',
+            txt: 'Your text...',
             font: 'impact',
             size: 50,
             color: 'white',
@@ -29,7 +29,7 @@ var gMeme = {
             }
         },
         {
-            txt: 'TEXT',
+            txt: 'Your text...',
             font: 'impact',
             size: 50,
             color: 'white',
@@ -42,6 +42,12 @@ var gMeme = {
             }
         }
     ]
+}
+
+function removeMeme(idx) {
+    const savedMemes = loadFromStorage('savedMemesDB')
+    savedMemes.splice(idx, 1)
+    saveToStorage('savedMemesDB', savedMemes)
 }
 
 function setTextClicked(bool) {
@@ -150,10 +156,9 @@ function setSavedMeme(idx) {
     gMeme = savedMemes[idx]
 }
 
-function saveMeme() {
-    const url = gMeme.url
+function saveMeme(img) {
+    gMeme.url = img.src
     const meme = JSON.parse(JSON.stringify(gMeme));
-    meme.url = url
     gSavedMemes.push(meme)
     saveToStorage('savedMemesDB', gSavedMemes)
     const savedMemes = loadFromStorage('savedMemesDB')
@@ -196,7 +201,7 @@ function alignText(direction) {
     }
 }
 
-function addLine(txt = 'TEXT') {
+function addLine(txt = 'Your text...') {
     const line = {
         txt,
         font: 'impact',
@@ -240,10 +245,6 @@ function changeColor(color) {
 
 function setImg(elImg) {
     gMeme.selectedImgId = elImg.dataset.id
-}
-
-function getImgs() {
-    return gImgs
 }
 
 function getMeme() {

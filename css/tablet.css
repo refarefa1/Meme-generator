@@ -1,4 +1,4 @@
-.logo{
+.logo {
     cursor: pointer;
 }
 
@@ -23,18 +23,18 @@
     display: none;
 }
 
-.black-screen{
+.black-screen {
     display: none;
 }
 
-.fa.more::before{
+.fa.more::before {
     content: "More";
     font-family: raleway-regular;
     font-size: 1.5em;
     letter-spacing: 0.05em;
 }
 
-.main-hero h1{
+.main-hero h1 {
     font-size: 4em !important;
 }
 
@@ -50,7 +50,16 @@
     width: 30%;
 }
 
-.meme-editor-container{
+.main-content .upload{
+    display: flex;
+    justify-content: center;
+}
+
+.main-content .upload-btn{
+    width: 30% !important;
+}
+
+.meme-editor-container {
     height: 100%;
 }
 
@@ -76,11 +85,25 @@
     padding-left: 15px;
 }
 
-.features-container>* {
-    margin-top: 0;
-}
-
 .meme-editor-container .features-container>*:not(.text-input) {
     width: auto;
     height: 80px;
 }
+
+.saved-meme{
+    position: relative;
+}
+
+.saved-meme button{
+    margin: 0 !important;
+    z-index: 1;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    padding: 6px 10px;
+}
+
+.saved-meme img{
+    width: 100%;
+}
+

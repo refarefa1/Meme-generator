@@ -36,22 +36,23 @@
     <section onclick="onToggleMenu()" class="black-screen full"></section>
 
     <main class="main-content main-layout">
-        <section class="filter-container flex column">
+        <!-- <section class="filter-container flex column">
             <input class="search-filter frr" type="search" placeholder="Search">
             <section class="tags-container flex space-between">
                 <section class="tags">Funny animal bla bla bla</section>
                 <button class="tags-btn gradient fa more"></button>
             </section>
-        </section>
+        </section> -->
         <section class="upload">
             <button class="gradient upload-btn">
                 Upload your meme!
                 <input onchange="onUploadImg(event)" type="file" class="image-input" accept="image/jpeg, image/jpg">
             </button>
         </section>
-        <section class="gallery-container">
+        <section class="gallery-container full">
         </section>
     </main>
+
 
 
     <section class="meme-editor-container main-layout hide">
@@ -88,8 +89,15 @@
 
     </section>
 
+    <!-- <footer class="main-footer gradient full flex justify-center align-center">
+        <h3><span>©</span> All rights reserved to refarefa1</h3>
+    </footer> -->
+
+
     <section class="saved-memes main-content main-layout hide">
-        <section class="saved-gallery-container gallery-container"></section>
+        <section class="saved-gallery-container gallery-container">
+         
+        </section>
     </section>
 
     <script src="js/service/storage-service.js"></script>

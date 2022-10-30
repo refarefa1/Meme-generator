@@ -33,7 +33,6 @@ function onUploadImg(e) {
             resizeCanvas(img)
             // addEventListener('resize', resizeCanvas)
             setTextLocation()
-            gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
             renderMeme()
         }
         img.src = event.target.result
