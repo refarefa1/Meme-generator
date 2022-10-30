@@ -21,6 +21,8 @@ var gMeme = {
             size: 50,
             color: 'white',
             isStroke: false,
+            width: 0,
+            height: 0,
             position: {
                 x: 0,
                 y: 50
@@ -32,6 +34,8 @@ var gMeme = {
             size: 50,
             color: 'white',
             isStroke: false,
+            width: 0,
+            height: 0,
             position: {
                 x: 0,
                 y: 0
@@ -72,18 +76,16 @@ function isSizingClicked(pos) {
 function isTextClicked(pos) {
     const lines = gMeme.lines
     return lines.some((line, idx) => {
-        const textWidth = gCtx.measureText(line.txt).width
-        const textHeight = gCtx.measureText(line.txt).fontBoundingBoxAscent + gCtx.measureText(line.txt).fontBoundingBoxDescent
 
-
-        if (pos.x < line.position.x + textWidth / 2 + 20 &&
-            pos.x > line.position.x - textWidth / 2 - 20 &&
-            pos.y < line.position.y + textHeight / 2 + 20 &&
-            pos.y > line.position.y - textHeight / 2 - 20) {
+        if (pos.x < line.position.x + line.width / 2 &&
+            pos.x > line.position.x - line.width / 2 &&
+            pos.y < line.position.y + line.height / 2 &&
+            pos.y > line.position.y - line.height / 2) {
             if (!gUser.isDrag && !gUser.isSizing) gMeme.selectedLineIdx = idx
             return true
         }
     })
+
 }
 
 function getEvPos(ev) {
@@ -200,6 +202,8 @@ function addLine(txt = 'TEXT') {
         font: 'impact',
         size: 50,
         color: 'white',
+        width: 0,
+        height: 0,
         position: {
             x: gElCanvas.width / 2,
             y: gElCanvas.height / 2

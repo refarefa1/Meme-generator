@@ -11,6 +11,8 @@ function renderMeme() {
     const meme = getMeme()
     let img = new Image()
     img = gElImg
+    gElCanvas.width = gElCanvas.clientWidth
+    gElCanvas.height = gElCanvas.clientHeight
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     const lines = meme.lines
     lines.forEach(({ color, size, txt, isStroke, font }, idx) => {
@@ -33,6 +35,13 @@ function drawText(color, size, txt, isStroke, font, idx) {
     gCtx.lineJoin = "miter"
     gCtx.miterLimit = 2;
     gCtx.strokeText(txt, pos.x, pos.y)
+
+    const textWidth = gCtx.measureText(txt).width
+    const textHeight = gCtx.measureText(txt).fontBoundingBoxAscent + gCtx.measureText(txt).fontBoundingBoxDescent
+
+    meme.lines[idx].width = textWidth + 20
+    meme.lines[idx].height = textHeight + 10
+
     if (!isStroke) {
         gCtx.fillText(txt, pos.x, pos.y)
     }
@@ -59,6 +68,8 @@ function drawTextRect(txt, idx, font) {
     gCtx.strokeStyle = 'orange'
     gCtx.strokeRect(startPosX - 10, startPosY - 5, textWidth + 20, textHeight + 10)
     drawArc(startPosX + textWidth + 10, startPosY + textHeight + 5)
+
+
 }
 
 function drawArc(x, y) {
@@ -90,7 +101,6 @@ function onMove(ev) {
     else if (isSizingClicked(pos)) document.body.style.cursor = 'se-resize'
     else document.body.style.cursor = 'auto '
 
-
     const { isDrag, isSizing } = getUser()
     if (isDrag) {
         const dx = pos.x - gStartPos.x
@@ -106,8 +116,6 @@ function onMove(ev) {
         gStartPos = pos
         renderMeme()
     }
-
-
 }
 
 function onUp() {
@@ -210,16 +218,12 @@ function onImgSelect() {
 }
 
 function resizeCanvas() {
-    const elContainer = document.querySelector('.meme-editor-container')
     if (window.innerWidth < 1000) {
-
-        gElCanvas.width = elContainer.offsetWidth - 40
+        gElCanvas.width = gElCanvas.width - 40
         gElCanvas.height = gElImg.height * gElCanvas.width / gElImg.width
-
     } else {
-
-        gElCanvas.width = elContainer.offsetHeight - 50
-        gElCanvas.height = gElImg.height * gElCanvas.width / gElImg.width
+        gElCanvas.width = gElCanvas.clientWidth - 50
+        gElCanvas.height = gElImg.height * gElCanvas.clientWidth / gElImg.width
     }
     renderMeme()
 }
@@ -228,8 +232,8 @@ function setTextLocation() {
     const meme = getMeme()
     const lines = meme.lines
     lines.forEach((line, idx) => {
-        line.position.x = gElCanvas.width / 2
-        if (idx === 1) line.position.y = gElCanvas.height - 50
+        line.position.x = gElCanvas.clientWidth / 2
+        if (idx === 1) line.position.y = gElCanvas.clientHeight - 50
     })
 }
 
