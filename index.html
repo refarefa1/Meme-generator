@@ -29,9 +29,11 @@
         </section>
     </nav>
 
+    <header class="main-hero">
+        <h1>Make your own memes!</h1>
+    </header>
 
     <section onclick="onToggleMenu()" class="black-screen full"></section>
-
 
     <main class="main-content main-layout">
         <section class="filter-container flex column">
@@ -44,8 +46,7 @@
         <section class="upload">
             <button class="gradient upload-btn">
                 Upload your meme!
-                <input onchange="onUploadImg(event)" type="file" class="image-input"
-                    accept="image/jpeg, image/jpg">
+                <input onchange="onUploadImg(event)" type="file" class="image-input" accept="image/jpeg, image/jpg">
             </button>
         </section>
         <section class="gallery-container">
@@ -84,7 +85,7 @@
             <button class="fa download" onclick="onDownloadImg()"></button>
             <button class="save gradient" onclick="onSaveMeme()">Save meme</button>
         </section>
-        
+
     </section>
 
     <section class="saved-memes main-content main-layout hide">

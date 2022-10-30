@@ -211,7 +211,7 @@ function onImgSelect() {
     setImg(this)
     gElImg = this
     resizeCanvas(this)
-    addEventListener('resize', resizeCanvas);
+    // addEventListener('resize', resizeCanvas);
     setTextLocation()
     renderMeme()
 }

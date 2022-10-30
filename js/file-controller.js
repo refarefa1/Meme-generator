@@ -30,9 +30,8 @@ function onUploadImg(e) {
         var img = new Image()
         showMemeEditor()
         img.onload = function () {
-            gElCanvas.width = img.width; gElCanvas.height = img.height
             resizeCanvas(img)
-            addEventListener('resize', resizeCanvas)
+            // addEventListener('resize', resizeCanvas)
             setTextLocation()
             gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
             renderMeme()

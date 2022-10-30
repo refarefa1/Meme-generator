@@ -1,3 +1,7 @@
+.main-hero h1{
+    font-size: 6em !important;
+}
+
 .main-content .gallery-container{
     column-count: 5 !important;
 }

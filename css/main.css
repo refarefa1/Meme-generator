@@ -17,21 +17,25 @@
 html {
     --scrollbarBG: #CFD8DC;
     --thumbBG: #90A4AE;
-  }
-  body::-webkit-scrollbar {
+}
+
+body::-webkit-scrollbar {
     width: 20px;
-  }
-  body {
+}
+
+body {
     scrollbar-width: thin;
     scrollbar-color: var(--thumbBG) var(--scrollbarBG);
-  }
-  body::-webkit-scrollbar-track {
+}
+
+body::-webkit-scrollbar-track {
     background: var(--scrollbarBG);
-  }
-  body::-webkit-scrollbar-thumb {
-    background-color: var(--thumbBG) ;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG);
     border: 3px solid var(--scrollbarBG);
-  }
+}
 
 * {
     box-sizing: border-box;
@@ -133,8 +137,8 @@ button {
     background-image: linear-gradient(to right, var(--clr1), var(--clr2));
 }
 
-.b-gradient{
-    background-image: linear-gradient(to right,var(--clr3), var(--clr4));
+.b-gradient {
+    background-image: linear-gradient(to right, var(--clr3), var(--clr4));
 }
 
 .main-nav .nav-content .menu.transform-menu {
@@ -164,7 +168,7 @@ button {
     margin-bottom: 10px;
 }
 
-.main-content .gallery-container>*:hover{
+.main-content .gallery-container>*:hover {
     scale: 1.05;
 }
 
@@ -236,9 +240,20 @@ button {
 
 /* main */
 
+.main-hero {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.main-hero h1 {
+    color: #FFFFFF;
+    font-size: 3em;
+    text-shadow: 0 1px 0 #CCCCCC, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
+}
+
 .main-content,
 .meme-editor-container {
-    margin-top: 120px;
+    margin-top: 20px;
 }
 
 /* filter */
@@ -266,7 +281,7 @@ button {
     cursor: pointer;
 }
 
-.main-content .upload-btn{
+.main-content .upload-btn {
     width: 100%;
     height: 50px;
     position: relative;
@@ -274,7 +289,7 @@ button {
     font-size: 1em;
 }
 
-.main-content .upload-btn input{
+.main-content .upload-btn input {
     width: 100%;
     position: absolute;
     top: 0;

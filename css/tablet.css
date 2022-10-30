@@ -34,8 +34,11 @@
     letter-spacing: 0.05em;
 }
 
+.main-hero h1{
+    font-size: 4em !important;
+}
+
 .main-content .gallery-container {
-    /* grid-template-columns: repeat(3, 1fr) !important; */
     column-count: 3 !important;
 }
 

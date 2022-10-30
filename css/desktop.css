@@ -1,3 +1,7 @@
+.main-hero h1{
+    font-size: 4em !important;
+}
+
 .main-content .filter-container .search-filter,
     .main-content .filter-container .tags-container {
         flex-grow: 1;
