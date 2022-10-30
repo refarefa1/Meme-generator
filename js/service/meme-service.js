@@ -77,17 +77,10 @@ function isTextClicked(pos) {
     const lines = gMeme.lines
     return lines.some((line, idx) => {
 
-<<<<<<< HEAD
         if (pos.x < line.position.x + line.width / 2 &&
             pos.x > line.position.x - line.width / 2 &&
             pos.y < line.position.y + line.height / 2 &&
             pos.y > line.position.y - line.height / 2) {
-=======
-        if (pos.x < line.position.x + textWidth / 2 + 20 &&
-            pos.x > line.position.x - textWidth / 2 - 20 &&
-            pos.y < line.position.y + textHeight / 2 + 20 &&
-            pos.y > line.position.y - textHeight / 2 - 20) {
->>>>>>> 6b441bfdad95374270b3d692f4dd1c9841a9dd7a
             if (!gUser.isDrag && !gUser.isSizing) gMeme.selectedLineIdx = idx
             return true
         }
