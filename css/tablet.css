@@ -85,10 +85,10 @@
     padding-left: 15px;
 }
 
-.meme-editor-container .features-container{
-    max-width: 480px !important;
+/* .meme-editor-container .features-container{
+    max-width: 620px !important;
 
-}
+} */
 
 .meme-editor-container .features-container>*:not(.text-input) {
     width: auto;
