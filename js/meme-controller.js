@@ -8,20 +8,24 @@ var gElCanvas
 var gCtx
 
 function renderMeme() {
+    gElCanvas.width = gElCanvas.clientWidth
+    gElCanvas.height = gElCanvas.clientHeight
     const meme = getMeme()
     let img = new Image()
     img = gElImg
     if (meme.url) img.src = meme.url
 
-    gElCanvas.width = gElCanvas.clientWidth
-    gElCanvas.height = gElCanvas.clientHeight
-
+    img.onload = () => {
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+    }
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     const lines = meme.lines
     lines.forEach(({ color, size, txt, isStroke, font }, idx) => {
         drawText(color, size, txt, isStroke, font, idx)
     }
     )
+
+
 }
 
 function drawText(color, size, txt, isStroke, font, idx) {
@@ -169,7 +173,7 @@ function onSaveMeme() {
                 <img onclick="renderSavedMeme(${idx})" src="${imgContent}" data-id=${meme.selectedImgId}>
                 </section>
                 `
-                // <button onclick="onRemoveMeme(${idx})" class="remove-btn">X</button>
+            // <button onclick="onRemoveMeme(${idx})" class="remove-btn">X</button>
         })
         document.querySelector('.saved-gallery-container').innerHTML = strHTML.join('')
         showSavedMemes()
@@ -240,7 +244,6 @@ function onImgSelect() {
     setImg(this)
     gElImg = this
     resizeCanvas(this)
-    // addEventListener('resize ', resizeCanvas);
     setTextLocation()
     renderMeme()
 }
@@ -253,7 +256,6 @@ function resizeCanvas() {
         gElCanvas.width = gElCanvas.clientWidth - 50
         gElCanvas.height = gElImg.height * gElCanvas.clientWidth / gElImg.width
     }
-    renderMeme()
 }
 
 function setTextLocation() {
