@@ -40,3 +40,8 @@ function onUploadImg(e) {
     }
     reader.readAsDataURL(e.target.files[0]);
 }
+
+function onShareImg() {
+    const elShare = document.querySelector('.share')
+    elShare.href = 'whatsapp://send?text='+encodeURIComponent(gElImg.src)
+}

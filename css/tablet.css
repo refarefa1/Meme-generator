@@ -75,8 +75,7 @@
         'color align-left align-center align-right add'
         'select select select stroke delete'
         'emoji1 emoji2 emoji3 emoji4 emoji5'
-        'share share share download download'
-        'save save save save save'
+        'download download save save save'
     ;
 }
 
@@ -84,11 +83,6 @@
     flex-basis: 65%;
     padding-left: 15px;
 }
-
-/* .meme-editor-container .features-container{
-    max-width: 620px !important;
-
-} */
 
 .meme-editor-container .features-container>*:not(.text-input) {
     width: auto;
