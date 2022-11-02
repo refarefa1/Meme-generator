@@ -14,10 +14,6 @@ function renderMeme() {
     let img = new Image()
     img = gElImg
     if (meme.url) img.src = meme.url
-
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-    }
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     const lines = meme.lines
     lines.forEach(({ color, size, txt, isStroke, font }, idx) => {
@@ -240,12 +236,17 @@ function onChangeColor(color) {
 function onImgSelect() {
     const user = getUser()
     user.isSaving = false
-    showMemeEditor()
     setImg(this)
-    gElImg = this
-    resizeCanvas(this)
-    setTextLocation()
-    renderMeme()
+    var img = new Image()
+    showMemeEditor()
+    img.onload = function () {
+        resizeCanvas(img)
+        setTextLocation()
+        renderMeme()
+    }
+    img.src = this.src
+    gElImg = img
+
 }
 
 function resizeCanvas() {

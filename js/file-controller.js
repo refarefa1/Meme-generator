@@ -31,7 +31,6 @@ function onUploadImg(e) {
         showMemeEditor()
         img.onload = function () {
             resizeCanvas(img)
-            // addEventListener('resize', resizeCanvas)
             setTextLocation()
             renderMeme()
         }
